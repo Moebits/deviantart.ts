@@ -1,14 +1,15 @@
 import api from "./api/api"
-import {Deviation, Gallery, RSS, User, Util} from "./endpoints"
+import {Browse, Deviation, Gallery, RSS, User, Util} from "./endpoints"
 import {DeviantArtAuth} from "./types/ApiTypes"
 
-export default class DeviantArt {
+export default class DeviantArt<A extends string | undefined> {
     public accessToken: string
-    public rss: RSS
-    public deviation: Deviation
-    public user: User
-    public gallery: Gallery
-    public util: Util
+    public rss = new RSS(this.accessToken)
+    public deviation = new Deviation(this.accessToken)
+    public user = new User(this.accessToken)
+    public gallery = new Gallery(this.accessToken)
+    public util = new Util(this.accessToken)
+    public browse = new Browse(this.accessToken)
     constructor(private clientId?: string, private clientSecret?: string) {}
 
     private readonly verifyAuth =  async () => {
@@ -27,7 +28,7 @@ export default class DeviantArt {
         if (clientSecret) this.clientSecret = clientSecret
         if (!await this.verifyAuth()) {
             const auth = await api.get("oauth2/token", {grant_type: "client_credentials", client_id: this.clientId, client_secret: this.clientSecret}) as DeviantArtAuth
-            this.accessToken = auth.access_token
+            this.accessToken = auth.access_token as A
         }
         this.rss = new RSS(this.accessToken)
         this.deviation = new Deviation(this.accessToken)
