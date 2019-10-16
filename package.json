@@ -1,0 +1,28 @@
+{
+  "name": "deviantart.ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api/deviantart.js",
+  "types": "api/deviantart.d.ts",
+  "scripts": {
+    "start": "tsc && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tenpi/tslint": "^1.0.5",
+    "@types/html-entities": "^1.2.16",
+    "@types/node": "^12.11.1",
+    "@types/xml2js": "^0.4.5",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^6.2.1",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "html-entities": "^1.2.1",
+    "xml2js": "^0.4.22"
+  }
+}
