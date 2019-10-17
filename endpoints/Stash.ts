@@ -1,0 +1,16 @@
+import api from "../api/api"
+import {DeviantArtStash, DeviantArtStashItem} from "../types"
+
+export class Stash {
+    constructor(private readonly accessToken: string) {}
+
+    public get = async (stackid: string, params?: {mature_content: boolean}) => {
+        const result = await api.get(`api/v1/oauth2/stash/${stackid}`, {stackid, params, access_token: this.accessToken})
+        return result as Promise<DeviantArtStash>
+    }
+
+    public item = async (itemid: string, params?: {ext_submission: boolean, ext_camera: boolean, ext_stats: boolean, mature_content: boolean}) => {
+        const result = await api.get(`api/v1/oauth2/stash/item/${itemid}`, {params, access_token: this.accessToken})
+        return result as Promise<DeviantArtStashItem>
+    }
+}

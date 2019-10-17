@@ -1,11 +1,16 @@
 import api from "../api/api"
-import {DeviationRSS} from "./../types/RSSTypes"
+import {DeviationRSS} from "./../types"
 
 export class RSS {
     constructor(private readonly accessToken: string) {}
 
     public get = async (deviationURL: string) => {
         const deviantInfo = await api.parseUrl(deviationURL)
+        if (!deviantInfo.title) {
+            const jsonQuery = await api.rssGet({q: deviationURL, type: "deviation", access_token: this.accessToken}, 1)
+            if (!jsonQuery[0]) return jsonQuery[0]
+            return Promise.reject("No results were found, try searching with another query.")
+        }
         const json = await api.rssGet({q: deviantInfo.title, type: "deviation", access_token: this.accessToken}, 100)
         const parsed: DeviationRSS[] = []
         for (let i = 0; i < json.length; i++) {

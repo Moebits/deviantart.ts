@@ -1,3 +1,6 @@
 {
-    "extends": ["@tenpi/tslint"]
+    "extends": ["@tenpi/tslint"],
+    "rules": {
+        "variable-name": false
+    }
 }

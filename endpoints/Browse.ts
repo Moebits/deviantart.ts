@@ -1,11 +1,9 @@
 import api from "../api/api"
-import {DeviantArtDeviation} from "./../dist/types/DeviationTypes.d"
+import {DeviantArtDeviation} from "../types"
 import {DeviantArtCategoryTree, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults, DeviantArtSearchResults} from "./../types/BrowseTypes"
 
 export class Browse {
-    constructor(private readonly accessToken: string) {
-        if (!accessToken) Promise.reject("No access token provided. You must login first. ")
-    }
+    constructor(private readonly accessToken: string) {}
 
     public categoryTree = async (catpath: string, params?: {mature_content: string}) => {
         const result = await api.get(`api/v1/oauth2/browse/categorytree`, {catpath, params, access_token: this.accessToken})
@@ -48,6 +46,8 @@ export class Browse {
     }
 
     public popular = async (params?: {category_path: string, q: string, timerange: string, offset: number, limit: number, expand: string, mature_content: boolean}) => {
+        console.log(this.accessToken)
+        console.log(params)
         const result = await api.get(`api/v1/oauth2/browse/popular`, {params, access_token: this.accessToken})
         return result as Promise<DeviantArtQueryResults>
     }
