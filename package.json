@@ -1,20 +1,27 @@
 {
   "name": "deviantart.ts",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.4",
+  "description": "Wrapper for the DeviantArt API with typings",
   "main": "dist/deviantart.js",
   "types": "dist/deviantart.d.ts",
   "scripts": {
     "start": "tsc && node dist/index.js",
     "test": "ts-mocha --timeout 30000 -p tsconfig.json test/**/*.spec.ts"
   },
-  "keywords": ["deviantart", "typescript", "ts", "api", "art", "anime"],
+  "keywords": [
+    "deviantart",
+    "typescript",
+    "ts",
+    "api",
+    "art",
+    "anime"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Tenpi/deviantart.ts"
   },
   "author": "Tenpi",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@tenpi/tslint": "^1.0.5",
     "@types/html-entities": "^1.2.16",
@@ -23,6 +30,7 @@
     "@types/xml2js": "^0.4.5",
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
+    "gulp": "^4.0.2",
     "mocha": "^6.2.1",
     "ts-mocha": "^6.0.0",
     "typescript": "^3.6.4"

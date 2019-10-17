@@ -3,11 +3,11 @@ import "mocha"
 import DeviantArt from "../DeviantArt"
 
 require("dotenv").config()
-const deviantArt = new DeviantArt(process.env.DEVIANTART_CLIENT_ID, process.env.DEVIANTART_CLIENT_SECRET)
+let deviantArt: DeviantArt
 
 describe("RSS", async function() {
     this.beforeAll(async function() {
-        await deviantArt.login()
+        deviantArt = await DeviantArt.login(process.env.DEVIANTART_CLIENT_ID, process.env.DEVIANTART_CLIENT_SECRET)
     })
 
     it("should get from a URL", async function() {

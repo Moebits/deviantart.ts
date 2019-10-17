@@ -19,15 +19,10 @@ Register an app at [**DeviantArt Developers**](https://www.deviantart.com/develo
 ```ts
 import DeviantArt from "deviantart.ts"
 
-/*Replace with your credentials. I recommend storing them in environmental variables*/
-const deviantArt = new DeviantArt(process.env.DEVIANTART_CLIENT_ID, process.env.DEVIANTART_CLIENT_SECRET)
-
-//All API methods return a Promise.
 async function useAPI() {
-    /*You must login in order to obtain your access
-    token, or else your api requests will
-    be rejected.*/
-    await deviantArt.login()
+    /*Since all API calls return a Promise, we must instantiate the class using an asynchronous method. Don't use
+    the constructor, all of the properties will be undefined!*/
+    const deviantArt = await DeviantArt.login(process.env.DEVIANTART_CLIENT_ID, process.env.DEVIANTART_CLIENT_SECRET)
 
     /*It is much, much faster to use the RSS API.
     This gets a single deviation by URL or by query.*/
