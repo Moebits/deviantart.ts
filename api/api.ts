@@ -24,15 +24,17 @@ export default class Api {
     }
 
     public static parseUrl = async (url: string) => {
-        if (!url.includes("deviantart.com")) return Promise.reject("That url is invalid.")
-        const title = url.match(/(?<=art\/)(.*?)(?=\d{5})/g) ? url.match(/(?<=art\/)(.*?)(?=\d{5})/)[0].replace(/-/g, " ") : null
+        let title = url.match(/(?<=art\/)(.*?)(?=\d{5})/g) ? url.match(/(?<=art\/)(.*?)(?=\d{5})/)[0].replace(/-/g, " ") : null
         const user = url.match(/(?<=com\/)(.*?)(?=\/art)/g) ? url.match(/(?<=com\/)(.*?)(?=\/art)/)[0] : null
         const id = url.match(/\d{5,}/) ? url.match(/\d{5,}/)[0] : null
+        if (title) {
+            const index = title.search(/\d/)
+            title = title.slice(0, index)
+        }
         return {title, user, id}
     }
 
     public static getRSS = async (params: any, limit?: number) => {
-        params = params.params ? params.params : params
         const xml = await axios.get(rssUrl, {params}).then((r) => r.data)
         const json = await parseStringPromise(xml).then((r) => r.rss.channel[0] ? r.rss.channel[0].item : null)
         if (!json || !json[0]) return Promise.reject("No search results.")
@@ -41,7 +43,7 @@ export default class Api {
         for (let i = 0; i < limit; i++) {
             jsonArray.push(json[i])
         }
-        return jsonArray
+        return jsonArray.filter(Boolean)
     }
 
     public static cleanHTML = (str: string) => {
