@@ -6,7 +6,7 @@ export class Collections {
     constructor(private readonly accessToken: string) {}
 
     public get = async (folderid: string, params?: {username?: string, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/collections/${folderid}`, {folderid, params})
+        const result = await this.api.get(`api/v1/oauth2/collections/${folderid}`, {params})
         return result as Promise<DeviantArtSearchResults>
     }
 

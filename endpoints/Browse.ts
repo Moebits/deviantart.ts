@@ -21,7 +21,7 @@ export class Browse {
         return result as Promise<DeviantArtMoreLikeThisPreview>
     }
 
-    public dailyDeviations = async (params?: {date?: string, expand?: string, mature_content?: boolean}) => {
+    public daily = async (params?: {date?: string, expand?: string, mature_content?: boolean}) => {
         const result = await this.api.get(`api/v1/oauth2/browse/dailydeviations`, {params})
         return result as Promise<{results: DeviantArtDeviation[]}>
     }
@@ -31,7 +31,7 @@ export class Browse {
         return result as Promise<DeviantArtQueryResults>
     }
 
-    public tagsSearch = async (tag_name: string, params?: {mature_content?: boolean}) => {
+    public tagSearch = async (tag_name: string, params?: {mature_content?: boolean}) => {
         const result = await this.api.get(`api/v1/oauth2/browse/tags/search`, {tag_name, params})
         return result as Promise<{results: {tag_name: string[]}}>
     }

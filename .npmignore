@@ -1,6 +1,2 @@
-test
-endpoints
-types
-tsconfig.json
-tslint.json
 dist/.env
+.env
