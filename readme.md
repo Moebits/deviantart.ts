@@ -2,6 +2,8 @@
 
 [![NPM](https://nodei.co/npm/deviantart.ts.png)](https://nodei.co/npm/deviantart.ts/)
 
+###Wip - v0.0.1
+
 ###About
 This is a wrapper for the DeviantArt API that covers all of the public endpoints, includes typings, and various utility functions to make finding deviations easier. 
 
@@ -17,8 +19,7 @@ Register an app at [**DeviantArt Developers**](https://www.deviantart.com/develo
 ```ts
 import DeviantArt from "deviantart.ts"
 
-/*Replace with your credentials. I recommend storing them 
-in environmental variables*/
+/*Replace with your credentials. I recommend storing them in environmental variables*/
 const deviantArt = new DeviantArt(process.env.DEVIANTART_CLIENT_ID, process.env.DEVIANTART_CLIENT_SECRET)
 
 //All API methods return a Promise.
@@ -53,7 +54,7 @@ async function useAPI() {
     /*In order to use the deviation endpoint, you must 
     have the deviation id. In this case, findByIteration()
     is very useful.*/
-    const deviationDetails = await deviantArt.deviation.get("1FA35A6D-E2CD-3CDF-1A65-410AB577BF10")
+    const deviationByID = await deviantArt.deviation.get("1FA35A6D-E2CD-3CDF-1A65-410AB577BF10")
 
 }
 useAPI()

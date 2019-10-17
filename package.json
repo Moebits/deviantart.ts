@@ -1,11 +1,12 @@
 {
   "name": "deviantart.ts",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "api/deviantart.js",
-  "types": "api/deviantart.d.ts",
+  "main": "dist/deviantart.js",
+  "types": "dist/deviantart.d.ts",
   "scripts": {
-    "start": "tsc && node dist/index.js"
+    "start": "tsc && node dist/index.js",
+    "test": "ts-mocha --timeout 30000 -p tsconfig.json test/**/*.spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +14,13 @@
   "devDependencies": {
     "@tenpi/tslint": "^1.0.5",
     "@types/html-entities": "^1.2.16",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.11.1",
     "@types/xml2js": "^0.4.5",
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "mocha": "^6.2.1",
+    "ts-mocha": "^6.0.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {

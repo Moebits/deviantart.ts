@@ -32,6 +32,7 @@ export default class Api {
     }
 
     public static getRSS = async (params: any, limit?: number) => {
+        params = params.params ? params.params : params
         const xml = await axios.get(rssUrl, {params}).then((r) => r.data)
         const json = await parseStringPromise(xml).then((r) => r.rss.channel[0] ? r.rss.channel[0].item : null)
         if (!json || !json[0]) return Promise.reject("No search results.")
