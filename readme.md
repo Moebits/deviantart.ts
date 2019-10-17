@@ -1,21 +1,21 @@
-![DeviantArt.ts](../deviantart.ts/images/deviantart.tslogo.gif)
+![DeviantArt.ts](images/deviantart.tslogo.gif)
 
 [![NPM](https://nodei.co/npm/deviantart.ts.png)](https://nodei.co/npm/deviantart.ts/)
 
-###Wip - v0.0.1
+### Wip - v0.0.1
 
-###About
+### About
 This is a wrapper for the DeviantArt API that covers all of the public endpoints, includes typings, and various utility functions to make finding deviations easier. 
 
-###Insall
+### Insall
 ```ts
 npm install deviantart.ts
 ```
 
-###Getting Started
+### Getting Started
 Register an app at [**DeviantArt Developers**](https://www.deviantart.com/developers/) in order to receive a **client id** and a **client secret**. You will need these credentials in order to receive an **access token** from the DeviantArt API. Read the official api [**documentation**](https://www.deviantart.com/developers/http/v1/20160316) for information on all of the endpoints, the parameters that they take, and the responses that they send. This library only covers the client credentials endpoints.
 
-#####Searching for Deviations
+##### Searching for Deviations
 ```ts
 import DeviantArt from "deviantart.ts"
 
