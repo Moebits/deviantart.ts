@@ -5,7 +5,7 @@
     },
 
     "typedocOptions": {
-        "mode": "modules",
+        "mode": "file",
         "out": "docs",
         "exclude": ["node_modules", "dist"],
         "ignoreCompilerErrors": true
