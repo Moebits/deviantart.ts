@@ -63,7 +63,6 @@ export default class DeviantArt {
                 for (let i = 0; i < result.results.length; i++) {
                     const deviation = result.results[i]
                     const cleanUrl = deviation.url.match(/(?<=art\/)(.*?)(?=\d{5})/g)![0]
-                    console.log(cleanUrl)
                     if (cleanUrl.includes(title)) {
                         return deviation
                     }

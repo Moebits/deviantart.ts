@@ -12,12 +12,12 @@ export class Browse {
     }
 
     public moreLikeThis = async (seed: string, params?: {category: string, offset: number, limit: number, expand: string, mature_content: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis`, {params})
+        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis`, {seed, params})
         return result as Promise<DeviantArtSearchResults>
     }
 
     public moreLikeThisPreview = async (seed: string, params?: {expand: string, mature_content: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis/preview`, {params})
+        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis/preview`, {seed, params})
         return result as Promise<DeviantArtMoreLikeThisPreview>
     }
 

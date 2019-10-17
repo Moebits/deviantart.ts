@@ -1,6 +1,5 @@
 import api from "../api/api"
 import {DeviantArtDeviation, DeviationContent, DeviationDownload, DeviationEmbeddedContent, DeviationMetaData, DeviationWhoFaved} from "./../types/"
-import {Gallery} from "./Gallery"
 
 export class Deviation {
     private readonly api = new api(this.accessToken)
