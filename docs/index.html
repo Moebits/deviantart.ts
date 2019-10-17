@@ -1,0 +1,476 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>deviantart.ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">deviantart.ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> deviantart.ts</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="images/deviantart.tslogo.gif" alt="DeviantArt.ts"></p>
+				<p><a href="https://nodei.co/npm/deviantart.ts/"><img src="https://nodei.co/npm/deviantart.ts.png" alt="NPM"></a></p>
+				<a href="#about" id="about" style="color: inherit; text-decoration: none;">
+					<h3>About</h3>
+				</a>
+				<p>This is a wrapper for the DeviantArt API that covers all of the public endpoints, includes typings, and various utility functions to make finding deviations easier. </p>
+				<a href="#insall" id="insall" style="color: inherit; text-decoration: none;">
+					<h3>Insall</h3>
+				</a>
+				<pre><code class="language-ts">npm install deviantart.ts</code></pre>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h3>Getting Started</h3>
+				</a>
+				<p>Register an app at <a href="https://www.deviantart.com/developers/"><strong>DeviantArt Developers</strong></a> in order to receive a <strong>client id</strong> and a <strong>client secret</strong>. You will need these credentials in order to receive an <strong>access token</strong> from the DeviantArt API. Read the official api <a href="https://www.deviantart.com/developers/http/v1/20160316"><strong>documentation</strong></a> for information on all of the endpoints, the parameters that they take, and the responses that they send. This library only covers the client credentials endpoints.</p>
+				<a href="#searching-for-deviations" id="searching-for-deviations" style="color: inherit; text-decoration: none;">
+					<h4>Searching for Deviations</h4>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> DeviantArt <span class="hljs-keyword">from</span> <span class="hljs-string">"deviantart.ts"</span>
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useAPI</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">/*Since all API calls return a Promise, we must instantiate the class using an asynchronous method. Don't use
+    the constructor, all of the properties will be undefined!*/</span>
+    <span class="hljs-keyword">const</span> deviantArt = <span class="hljs-keyword">await</span> DeviantArt.login(process.env.DEVIANTART_CLIENT_ID, process.env.DEVIANTART_CLIENT_SECRET)
+
+    <span class="hljs-comment">/*It is much, much faster to use the RSS API.
+    This gets a single deviation by URL or by query.*/</span>
+    <span class="hljs-keyword">const</span> deviation = <span class="hljs-keyword">await</span> deviantArt.rss.get(<span class="hljs-string">"https://www.deviantart.com/fhilippe124/art/Sagiri-Izumi-Eromanga-sensei-fanart-678288299"</span>)
+
+    <span class="hljs-comment">/*To search for multiple, use search instead. The second parameter is 
+    the limit, the third is the sort method ("popular" or "newest").*/</span>
+    <span class="hljs-keyword">const</span> deviations = <span class="hljs-keyword">await</span> deviantArt.rss.search(<span class="hljs-string">"Eromanga Sensei"</span>, <span class="hljs-number">50</span>, <span class="hljs-string">"popular"</span>)
+
+    <span class="hljs-comment">/*The painfully slow alternative using the regular API is to 
+    iterate through all of a user's deviations to find the one that matches the URL.
+    But you can only get the deviation id through the api, so use this instead if you need it.*/</span>
+    <span class="hljs-keyword">const</span> verySlow = <span class="hljs-keyword">await</span> deviantArt.findByIteration(<span class="hljs-string">"https://www.deviantart.com/fhilippe124/art/Yamada-Elf-Eromanga-sensei-fanart-678701561"</span>)
+
+    <span class="hljs-comment">/*The browse endpoint offers searches for popular, newest, hot, undiscovered, etc. deviations.
+    All of the parameters in the params object are optional.*/</span>
+    <span class="hljs-keyword">const</span> popular = <span class="hljs-keyword">await</span> deviantArt.browse.popular({q: <span class="hljs-string">"anime"</span>})
+    <span class="hljs-keyword">const</span> hot = <span class="hljs-keyword">await</span> deviantArt.browse.hot({category_path: <span class="hljs-string">"manga"</span>})
+    <span class="hljs-comment">//The date is in yyyy-mm-dd format!</span>
+    <span class="hljs-keyword">const</span> daily = <span class="hljs-keyword">await</span> deviantArt.browse.daily({date: <span class="hljs-number">2019</span><span class="hljs-number">-07</span><span class="hljs-number">-03</span>})
+    <span class="hljs-keyword">const</span> tag = <span class="hljs-keyword">await</span> deviantArt.browse.tag(<span class="hljs-string">"cute"</span>)
+    <span class="hljs-keyword">const</span> undiscovered = <span class="hljs-keyword">await</span> deviantArt.browse.undiscovered({mature_content: <span class="hljs-literal">true</span>})
+
+    <span class="hljs-comment">/*In order to use the deviation endpoint, you must 
+    have the deviation id. In this case, findByIteration()
+    is very useful.*/</span>
+    <span class="hljs-keyword">const</span> deviationByID = <span class="hljs-keyword">await</span> deviantArt.deviation.get(<span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>)
+
+    <span class="hljs-comment">/*The moreLikeThis endpoint also uses an id.*/</span>
+    <span class="hljs-keyword">const</span> moreLikeThis = <span class="hljs-keyword">await</span> deviantArt.browse.moreLikeThis(<span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>)
+
+}
+useAPI()</code></pre>
+				<a href="#searching-for-users-and-folders" id="searching-for-users-and-folders" style="color: inherit; text-decoration: none;">
+					<h4>Searching for Users and Folders</h4>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useAPI</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">/*Search for a user's profile*/</span>
+    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> deviantArt.user.get(<span class="hljs-string">"tenpii"</span>)
+
+    <span class="hljs-comment">/*Get all of a user's deviations.*/</span>
+    <span class="hljs-keyword">const</span> userDeviations = <span class="hljs-keyword">await</span> deviantArt.gallery.all({username: <span class="hljs-string">"tenpii"</span>})
+
+    <span class="hljs-comment">/*Get all of their statuses*/</span>
+    <span class="hljs-keyword">const</span> statuses = <span class="hljs-keyword">await</span> deviantArt.user.statuses({username: <span class="hljs-string">"tenpii"</span>})
+
+    <span class="hljs-comment">/*Get all of their profile comments*/</span>
+    <span class="hljs-keyword">const</span> profileComments = <span class="hljs-keyword">await</span> deviantArt.comments.profile({username: <span class="hljs-string">"tenpii"</span>})
+
+    <span class="hljs-comment">/*Get all of a user's folders*/</span>
+    <span class="hljs-keyword">const</span> folders = <span class="hljs-keyword">await</span> deviantArt.collections.folders({username: <span class="hljs-string">"fhilippe124"</span>})
+
+    <span class="hljs-comment">/*Get all deviations in the folder. You must have the folder id, which you can get from the api call above.
+    The username parameter is only optional if you are searching your own folders.*/</span>
+    <span class="hljs-keyword">const</span> folderDeviations = <span class="hljs-keyword">await</span> deviantArt.collections.get(<span class="hljs-string">"79216EF7-CED7-6973-DD90-6793348AD2A4"</span>, {username: <span class="hljs-string">"fhilippe124"</span>})
+}</code></pre>
+				<a href="#searching-for-comments-and-tags" id="searching-for-comments-and-tags" style="color: inherit; text-decoration: none;">
+					<h4>Searching for Comments and Tags</h4>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useAPI</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">/*Note that the deviation id is required for this endpoint.*/</span>
+    <span class="hljs-keyword">const</span> comments = <span class="hljs-keyword">await</span> deviantArt.comments.deviation(<span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>)
+
+    <span class="hljs-comment">/*To get sibling comments, you must have the comment id, which you can get from the api call above.*/</span>
+    <span class="hljs-keyword">const</span> userDeviations = <span class="hljs-keyword">await</span> deviantArt.comments.siblings(<span class="hljs-string">"FE5A83B8-0495-9E1D-3A54-864D943D579C"</span>)
+
+    <span class="hljs-comment">/*To search for tags, you can use the browse endpoint.*/</span>
+    <span class="hljs-keyword">const</span> tagSearch = <span class="hljs-keyword">await</span> deviantArt.browse.tagSearch(<span class="hljs-string">"kawaii"</span>)
+}</code></pre>
+				<a href="#other-endpoints-and-parameters" id="other-endpoints-and-parameters" style="color: inherit; text-decoration: none;">
+					<h4>Other endpoints and parameters</h4>
+				</a>
+				<p>There are many more less commonly used endpoints such as <strong>Curated</strong>, <strong>Stash</strong>, and <strong>Data</strong>. For a more complete documentation please read the <a href="https://www.deviantart.com/developers/http/v1/20160316"><strong>api documentation</strong></a> on DeviantArt.</p>
+				<a href="#common-parameters" id="common-parameters" style="color: inherit; text-decoration: none;">
+					<h6>Common Parameters:</h6>
+				</a>
+				<ul>
+					<li><code>mature_content: boolean</code> - set to true to include mature results.</li>
+					<li><code>expand: string</code> - Expands the response objects, such as including <code>user.details</code> in a <code>DeviantArtUser</code> object. You may need to use type assertions if you use.</li>
+					<li><code>offset: number</code> - Returns results starting from the offset</li>
+					<li><code>limit: number</code> - Returns a certain amount of results</li>
+					<li><code>deviationid: string</code> - The deviation id. All id&#39;s look like: <code>1FA35A6D-E2CD-3CDF-1A65-410AB577BF10</code>.</li>
+					<li><code>userid: string</code> - The user id. </li>
+					<li><code>commentid: string</code> - The comment id. </li>
+					<li><code>folderid: string</code> - The folder id.</li>
+					<li><code>statusid: string</code> - The status id.</li>
+					<li><code>category_path: string</code> - The category path to search.</li>
+					<li><code>q: string</code> - The query to search.</li>
+					<li><code>timerange: string</code> - Timerange to search Ex. <code>(8hr, 5days, 2weeks, alltime)</code></li>
+					<li><code>date: string</code> - The date in <code>yyyy-mm-dd</code> format</li>
+				</ul>
+				<a href="#common-types" id="common-types" style="color: inherit; text-decoration: none;">
+					<h4>Common Types</h4>
+				</a>
+				<details>
+					<summary>DeviantArtDeviation</summary>
+					<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> DeviantArtDeviation {
+    deviationid: <span class="hljs-built_in">string</span>
+    printid: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+    url?: <span class="hljs-built_in">string</span>
+    title?: <span class="hljs-built_in">string</span>
+    category?: <span class="hljs-built_in">string</span>
+    category_path?: <span class="hljs-built_in">string</span>
+    is_favourited?: <span class="hljs-built_in">boolean</span>
+    is_deleted?: <span class="hljs-built_in">boolean</span>
+    author?: DeviantArtUser
+    stats?: {
+        comments: <span class="hljs-built_in">number</span>
+        favourites: <span class="hljs-built_in">number</span>
+    }
+    published_time?: <span class="hljs-built_in">string</span>
+    allows_comments?: <span class="hljs-built_in">boolean</span>
+    preview?: {
+        src: <span class="hljs-built_in">string</span>
+        height: <span class="hljs-built_in">number</span>
+        width: <span class="hljs-built_in">number</span>
+        transparency: <span class="hljs-built_in">boolean</span>
+    }
+    content?: {
+        src: <span class="hljs-built_in">string</span>
+        height: <span class="hljs-built_in">number</span>
+        width: <span class="hljs-built_in">number</span>
+        transparency: <span class="hljs-built_in">boolean</span>
+        filesize: <span class="hljs-built_in">number</span>
+    }
+    thumbs?: <span class="hljs-built_in">Array</span>&lt;{
+        src: <span class="hljs-built_in">string</span>
+        height: <span class="hljs-built_in">number</span>
+        width: <span class="hljs-built_in">number</span>
+        transparency: <span class="hljs-built_in">boolean</span>
+    }&gt;
+    videos?: <span class="hljs-built_in">Array</span>&lt;{
+        src: <span class="hljs-built_in">string</span>
+        quality: <span class="hljs-built_in">string</span>
+        filesize: <span class="hljs-built_in">number</span>
+        duration: <span class="hljs-built_in">number</span>
+    }&gt;
+    flash?: {
+        src: <span class="hljs-built_in">string</span>
+        height: <span class="hljs-built_in">number</span>
+        width: <span class="hljs-built_in">number</span>
+    }
+    daily_deviation?: {
+        body: <span class="hljs-built_in">string</span>
+        time: <span class="hljs-built_in">string</span>
+        giver: DeviantArtUser
+        suggester?: DeviantArtUser
+    }
+    excerpt?: <span class="hljs-built_in">string</span>
+    is_mature?: <span class="hljs-built_in">boolean</span>
+    is_downloadable?: <span class="hljs-built_in">boolean</span>
+    download_filesize?: <span class="hljs-built_in">number</span>
+    challenge?: {
+        <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>[]
+        completed: <span class="hljs-built_in">boolean</span>
+        tags: <span class="hljs-built_in">string</span>[]
+        locked?: <span class="hljs-built_in">boolean</span>
+        credit_deviation: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+        media: <span class="hljs-built_in">string</span>[]
+        level_label?: <span class="hljs-built_in">string</span>
+        time_limit?: <span class="hljs-built_in">number</span>
+        levels?: <span class="hljs-built_in">string</span>[]
+    }
+    challenge_entry?: {
+        challengeid: <span class="hljs-built_in">string</span>
+        challenge_title: <span class="hljs-built_in">string</span>
+        challenge?: DeviantArtDeviation
+        timed_duration: <span class="hljs-built_in">number</span>
+        submission_time: <span class="hljs-built_in">string</span>
+    }
+    motion_book?: {
+        embed_url: <span class="hljs-built_in">string</span>
+    }
+}</code></pre>
+				</details>
+				<details>
+					<summary>DeviantArtUser</summary>
+					<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> DeviantArtUser {
+    userid: <span class="hljs-built_in">string</span>
+    username: <span class="hljs-built_in">string</span>
+    usericon: <span class="hljs-built_in">string</span>
+    <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>
+    is_watching?: <span class="hljs-built_in">boolean</span>
+    details?: {
+        sex: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+        age: <span class="hljs-built_in">number</span> | <span class="hljs-literal">null</span>
+        joinDate: <span class="hljs-built_in">string</span>
+    }
+    geo?: {
+        country: <span class="hljs-built_in">string</span>
+        countryid: <span class="hljs-built_in">number</span>
+        timezone: <span class="hljs-built_in">string</span>
+    }
+    profile?: {
+        user_is_artist: <span class="hljs-built_in">boolean</span>
+        artist_level: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+        artist_specialty: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+        real_name: <span class="hljs-built_in">string</span>
+        tagline: <span class="hljs-built_in">string</span>
+        website: <span class="hljs-built_in">string</span>
+        cover_photo: <span class="hljs-built_in">string</span>
+        profile_pic: DeviantArtDeviation
+    }
+    stats?: {
+        watchers: <span class="hljs-built_in">number</span>
+        friends: <span class="hljs-built_in">number</span>
+    }
+}</code></pre>
+				</details>
+				<details>
+					<summary>DeviantArtComment</summary>
+					<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> DeviantArtComment {
+    commentid: <span class="hljs-built_in">string</span>
+    parentid: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+    posted: <span class="hljs-built_in">string</span>
+    replies: <span class="hljs-built_in">number</span>
+    hidden: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+    body: <span class="hljs-built_in">string</span>
+    user: DeviantArtUser
+}</code></pre>
+				</details>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_deviantart_.html">"<wbr>Deviant<wbr>Art"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_api_api_.html">"api/api"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_browse_.html">"endpoints/<wbr>Browse"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_collections_.html">"endpoints/<wbr>Collections"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_comments_.html">"endpoints/<wbr>Comments"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_curated_.html">"endpoints/<wbr>Curated"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_data_.html">"endpoints/<wbr>Data"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_deviation_.html">"endpoints/<wbr>Deviation"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_gallery_.html">"endpoints/<wbr>Gallery"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_rss_.html">"endpoints/RSS"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_stash_.html">"endpoints/<wbr>Stash"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_user_.html">"endpoints/<wbr>User"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_util_.html">"endpoints/<wbr>Util"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_endpoints_index_.html">"endpoints/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_test_rss_spec_.html">"test/RSS.spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_apitypes_.html">"types/<wbr>Api<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_browsetypes_.html">"types/<wbr>Browse<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_collectiontypes_.html">"types/<wbr>Collection<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_commenttypes_.html">"types/<wbr>Comment<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_curatedtypes_.html">"types/<wbr>Curated<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_deviationtypes_.html">"types/<wbr>Deviation<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_gallerytypes_.html">"types/<wbr>Gallery<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_rsstypes_.html">"types/RSSTypes"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_stashtypes_.html">"types/<wbr>Stash<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_usertypes_.html">"types/<wbr>User<wbr>Types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_index_.html">"types/index"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

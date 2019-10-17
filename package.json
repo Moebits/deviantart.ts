@@ -6,7 +6,8 @@
   "types": "dist/deviantart.d.ts",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "test": "ts-mocha --timeout 30000 -p tsconfig.json test/**/*.spec.ts"
+    "test": "ts-mocha --timeout 30000 -p tsconfig.json test/**/*.spec.ts",
+    "docs": "typedoc --out ./docs ./"
   },
   "keywords": [
     "deviantart",
@@ -33,6 +34,7 @@
     "gulp": "^4.0.2",
     "mocha": "^6.2.1",
     "ts-mocha": "^6.0.0",
+    "typedoc": "^0.15.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {

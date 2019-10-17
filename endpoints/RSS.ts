@@ -4,6 +4,9 @@ import {DeviationRSS} from "./../types"
 export class RSS {
     constructor(private readonly accessToken: string) {}
 
+    /**
+     * Gets a deviation by searching the RSS Feed. You can provide a URL or a search query.
+     */
     public get = async (deviationURL: string): Promise<DeviationRSS> => {
         const deviantInfo = await api.parseUrl(deviationURL)
         if (!deviantInfo.title) {
@@ -24,6 +27,10 @@ export class RSS {
         return Promise.reject("No results were found. The URL is invalid.")
     }
 
+    /**
+     * Searches for deviations in the RSS feed by query. You can also specify the limit
+     * and sort method (`popular` or `newest`)
+     */
     public search = async (query: string, limit?: number, sort?: string): Promise<DeviationRSS[]> => {
         switch (sort) {
             case "popular":

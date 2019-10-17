@@ -5,6 +5,10 @@ DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDeviation, DeviantArtFolders
 DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile,
 DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent, DeviationImageRSS, DeviationMetaData,
 DeviationRSS, DeviationThumbnailRSS, DeviationWhoFaved} from "./types"
+
+/**
+ * This is the main class for interacting with the DeviantArt API.
+ */
 export default class DeviantArt {
     public static accessToken: string
     public rss =  new RSS(DeviantArt.accessToken)
@@ -22,6 +26,10 @@ export default class DeviantArt {
 
     private constructor() {}
 
+    /**
+     * Logs into the DeviantArt API with your client id and token, and retrieves your access token.
+     * @returns An instance of the DeviantArt Class.
+     */
     public static login = async (clientId: string, clientSecret: string) => {
         if (!clientId || !clientSecret) {
             const missing = clientId ? "clientSecret" : "clientId"
@@ -33,6 +41,11 @@ export default class DeviantArt {
         return new DeviantArt()
     }
 
+    /**
+     * Finds a deviation from it's URL by iterating through all of the user's
+     * submitted illustrations. While slow if the user has a lot of deviations, with
+     * this function you can easily get a deviation's id.
+     */
     public findByIteration = async (deviationUrl: string): Promise<DeviantArtDeviation> => {
         let offset = 0
         if (deviationUrl.match(/(?<=art\/)(.*?)(?=\d{5})/g)) {

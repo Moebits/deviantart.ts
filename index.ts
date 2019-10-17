@@ -2,6 +2,9 @@ import DeviantArt from "./DeviantArt"
 
 require("dotenv").config();
 
+/**
+ * @ignore
+ */
 (async () => {
     const deviantArt = await DeviantArt.login(process.env.DEVIANTART_CLIENT_ID, process.env.DEVIANTART_CLIENT_SECRET)
     // const result = await deviantArt.findByIteration("https://www.deviantart.com/shouu-kun/art/Sagiri-680420718")
