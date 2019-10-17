@@ -111,6 +111,7 @@ There are many more less commonly used endpoints such as **Curated**, **Stash**,
 #### Common Types
 <details>
 <summary>DeviantArtDeviation</summary>
+    
 ```ts
 export interface DeviantArtDeviation {
     deviationid: string
@@ -195,6 +196,7 @@ export interface DeviantArtDeviation {
 
 <details>
 <summary>DeviantArtUser</summary>
+    
 ```ts
 export interface DeviantArtUser {
     userid: string
@@ -232,6 +234,7 @@ export interface DeviantArtUser {
 
 <details>
 <summary>DeviantArtComment</summary>
+    
 ```ts
 export interface DeviantArtComment {
     commentid: string
