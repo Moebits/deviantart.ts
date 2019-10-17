@@ -107,3 +107,140 @@ There are many more less commonly used endpoints such as **Curated**, **Stash**,
 - `q: string` - The query to search.
 - `timerange: string` - Timerange to search Ex. `(8hr, 5days, 2weeks, alltime)`
 - `date: string` - The date in `yyyy-mm-dd` format
+
+#### Common Types
+<details>
+<summary>DeviantArtDeviation</summary>
+```ts
+export interface DeviantArtDeviation {
+    deviationid: string
+    printid: string | null
+    url?: string
+    title?: string
+    category?: string
+    category_path?: string
+    is_favourited?: boolean
+    is_deleted?: boolean
+    author?: DeviantArtUser
+    stats?: {
+        comments: number
+        favourites: number
+    }
+    published_time?: string
+    allows_comments?: boolean
+    preview?: {
+        src: string
+        height: number
+        width: number
+        transparency: boolean
+    }
+    content?: {
+        src: string
+        height: number
+        width: number
+        transparency: boolean
+        filesize: number
+    }
+    thumbs?: Array<{
+        src: string
+        height: number
+        width: number
+        transparency: boolean
+    }>
+    videos?: Array<{
+        src: string
+        quality: string
+        filesize: number
+        duration: number
+    }>
+    flash?: {
+        src: string
+        height: number
+        width: number
+    }
+    daily_deviation?: {
+        body: string
+        time: string
+        giver: DeviantArtUser
+        suggester?: DeviantArtUser
+    }
+    excerpt?: string
+    is_mature?: boolean
+    is_downloadable?: boolean
+    download_filesize?: number
+    challenge?: {
+        type: string[]
+        completed: boolean
+        tags: string[]
+        locked?: boolean
+        credit_deviation: string | null
+        media: string[]
+        level_label?: string
+        time_limit?: number
+        levels?: string[]
+    }
+    challenge_entry?: {
+        challengeid: string
+        challenge_title: string
+        challenge?: DeviantArtDeviation
+        timed_duration: number
+        submission_time: string
+    }
+    motion_book?: {
+        embed_url: string
+    }
+}
+```
+</details>
+
+<details>
+<summary>DeviantArtUser</summary>
+```ts
+export interface DeviantArtUser {
+    userid: string
+    username: string
+    usericon: string
+    type: string
+    is_watching?: boolean
+    details?: {
+        sex: string | null
+        age: number | null
+        joinDate: string
+    }
+    geo?: {
+        country: string
+        countryid: number
+        timezone: string
+    }
+    profile?: {
+        user_is_artist: boolean
+        artist_level: string | null
+        artist_specialty: string | null
+        real_name: string
+        tagline: string
+        website: string
+        cover_photo: string
+        profile_pic: DeviantArtDeviation
+    }
+    stats?: {
+        watchers: number
+        friends: number
+    }
+}
+```
+</details>
+
+<details>
+<summary>DeviantArtComment</summary>
+```ts
+export interface DeviantArtComment {
+    commentid: string
+    parentid: string | null
+    posted: string
+    replies: number
+    hidden: string | null
+    body: string
+    user: DeviantArtUser
+}
+```
+</details>
