@@ -1,4 +1,4 @@
-import {DeviantArtDeviation} from "./DeviationTypes"
+import {DeviantArtDeviation} from "../types"
 
 export interface GalleryResult {
     has_more: boolean

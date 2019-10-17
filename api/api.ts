@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, {AxiosRequestConfig} from "axios"
 import {Html5Entities} from "html-entities"
 import {parseStringPromise} from "xml2js"
 import {DeviationRSS} from "./../types/RSSTypes"
@@ -7,15 +7,19 @@ const apiURL = "https://www.deviantart.com/"
 const rssUrl = "https://backend.deviantart.com/rss.xml"
 
 export default class Api {
-    public static get = async (endpoint: string, params: any) => {
+    constructor(private readonly accessToken: string) {}
+
+    public get = async (endpoint: string, params: any) => {
+        params = params.params ? params.params : params
+        params.access_token = this.accessToken
         const url = apiURL + endpoint
-        const result = await axios.get(url, {params}).then((r) => r.data)
+        const result = await axios.get(url, {params} as AxiosRequestConfig).then((r) => r.data)
         return result
     }
 
-    public static post = async (endpoint: string, params: any) => {
+    public static getNoLogin = async (endpoint: string, params: any) => {
         const url = apiURL + endpoint
-        const result = await axios.post(url, {params}).then((r) => r.data)
+        const result = await axios.get(url, {params}).then((r) => r.data)
         return result
     }
 
@@ -27,7 +31,7 @@ export default class Api {
         return {title, user, id}
     }
 
-    public static rssGet = async (params: any, limit?: number) => {
+    public static getRSS = async (params: any, limit?: number) => {
         const xml = await axios.get(rssUrl, {params}).then((r) => r.data)
         const json = await parseStringPromise(xml).then((r) => r.rss.channel[0] ? r.rss.channel[0].item : null)
         if (!json || !json[0]) return Promise.reject("No search results.")

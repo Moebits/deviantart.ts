@@ -1,4 +1,4 @@
-import {DeviantArtDeviation, DeviantArtStatus, DeviantArtUser} from "./index"
+import {DeviantArtDeviation, DeviantArtStatus, DeviantArtUser} from "../types"
 
 export interface DeviantArtComment {
     commentid: string

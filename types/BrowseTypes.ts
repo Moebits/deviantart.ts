@@ -1,5 +1,4 @@
-import {DeviantArtDeviation} from "./DeviationTypes"
-import {DeviantArtUser} from "./UserTypes"
+import {DeviantArtDeviation, DeviantArtUser} from "../types"
 
 export interface DeviantArtCategoryTree {
     categories: Array<{

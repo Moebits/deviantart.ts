@@ -7,11 +7,11 @@ export class RSS {
     public get = async (deviationURL: string) => {
         const deviantInfo = await api.parseUrl(deviationURL)
         if (!deviantInfo.title) {
-            const jsonQuery = await api.rssGet({q: deviationURL, type: "deviation", access_token: this.accessToken}, 1)
+            const jsonQuery = await api.getRSS({q: deviationURL, type: "deviation"}, 1)
             if (!jsonQuery[0]) return jsonQuery[0]
             return Promise.reject("No results were found, try searching with another query.")
         }
-        const json = await api.rssGet({q: deviantInfo.title, type: "deviation", access_token: this.accessToken}, 100)
+        const json = await api.getRSS({q: deviantInfo.title, type: "deviation"}, 100)
         const parsed: DeviationRSS[] = []
         for (let i = 0; i < json.length; i++) {
             parsed.push(api.formatJSON(JSON.stringify(json[i])))
@@ -24,7 +24,7 @@ export class RSS {
 
     public search = async (query: string, limit?: number, type?: string) => {
         if (!limit) limit = 50
-        const json = await api.rssGet({q: query, type, access_token: this.accessToken}, limit)
+        const json = await api.getRSS({q: query, type}, limit)
         const parsed: DeviationRSS[] = []
         for (let i = 0; i < json.length; i++) {
             parsed.push(api.formatJSON(JSON.stringify(json[i])))

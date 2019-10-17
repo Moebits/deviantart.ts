@@ -1,5 +1,5 @@
-import {DeviantArtDeviation} from "./DeviationTypes"
-import {DeviantArtUser} from "./UserTypes"
+import {DeviantArtDeviation, DeviantArtUser} from "../types"
+
 export interface DeviantArtUser {
     userid: string
     username: string

@@ -6,5 +6,5 @@ const deviantArt = new DeviantArt(process.env.DEVIANTART_CLIENT_ID, process.env.
 (async () => {
     await deviantArt.login()
     const result = await deviantArt.findByIteration("https://www.deviantart.com/shouu-kun/art/Sagiri-680420718")
-    return result
+    console.log(result)
 })()

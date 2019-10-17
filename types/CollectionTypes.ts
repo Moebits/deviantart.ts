@@ -1,4 +1,4 @@
-import {DeviantArtDeviation} from "./index"
+import {DeviantArtDeviation} from "../types"
 
 export interface DeviantArtFolders {
     results: Array<{

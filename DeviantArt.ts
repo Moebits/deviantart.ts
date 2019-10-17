@@ -1,6 +1,6 @@
 import api from "./api/api"
 import {Browse, Collections, Comments, Curated, Data, Deviation, Gallery, RSS, Stash, User, Util} from "./endpoints"
-import {DeviantArtAuth} from "./types/ApiTypes"
+import {DeviantArtAuth, DeviantArtDeviation} from "./types"
 
 export default class DeviantArt {
     public accessToken: string
@@ -15,7 +15,7 @@ export default class DeviantArt {
     public collections = new Collections(this.accessToken)
     public stash = new Stash(this.accessToken)
     public comments = new Comments(this.accessToken)
-    public api = api
+    public api = new api(this.accessToken)
     constructor(private clientId?: string, private clientSecret?: string) {}
 
     private readonly verifyAuth =  async () => {
@@ -25,7 +25,7 @@ export default class DeviantArt {
             credentials by registering an application at https://www.deviantart.com/developers/`)
         }
         if (!this.accessToken) return false
-        const placebo = await api.get("api/v1/oauth2/placebo", {access_token: this.accessToken})
+        const placebo = await api.getNoLogin("api/v1/oauth2/placebo", {access_token: this.accessToken})
         return placebo.status === "success" ? true : false
     }
 
@@ -33,7 +33,7 @@ export default class DeviantArt {
         if (clientId) this.clientId = clientId
         if (clientSecret) this.clientSecret = clientSecret
         if (!await this.verifyAuth()) {
-            const auth = await api.get("oauth2/token", {grant_type: "client_credentials", client_id: this.clientId, client_secret: this.clientSecret}) as DeviantArtAuth
+            const auth = await api.getNoLogin("oauth2/token", {grant_type: "client_credentials", client_id: this.clientId, client_secret: this.clientSecret}) as DeviantArtAuth
             this.accessToken = auth.access_token
         }
         this.rss = new RSS(this.accessToken)
@@ -47,10 +47,10 @@ export default class DeviantArt {
         this.collections = new Collections(this.accessToken)
         this.stash = new Stash(this.accessToken)
         this.comments = new Comments(this.accessToken)
-        return this.accessToken
+        this.api = new api(this.accessToken)
     }
 
-    public findByIteration = async (deviationUrl: string) => {
+    public findByIteration = async (deviationUrl: string): Promise<DeviantArtDeviation> => {
         let offset = 0
         if (deviationUrl.match(/(?<=art\/)(.*?)(?=\d{5})/g)) {
             const title = deviationUrl.match(/(?<=art\/)(.*?)(?=\d{5})/g)![0]
@@ -63,12 +63,13 @@ export default class DeviantArt {
                 for (let i = 0; i < result.results.length; i++) {
                     const deviation = result.results[i]
                     const cleanUrl = deviation.url.match(/(?<=art\/)(.*?)(?=\d{5})/g)![0]
+                    console.log(cleanUrl)
                     if (cleanUrl.includes(title)) {
                         return deviation
                     }
                 }
                 offset += 24
-                return iterate(username)
+                return iterate(user)
             }
             return iterate(user)
         } else {

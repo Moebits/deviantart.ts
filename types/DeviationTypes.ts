@@ -1,4 +1,4 @@
-import {DeviantArtUser} from "./UserTypes"
+import {DeviantArtUser} from "../types"
 
 export interface DeviantArtDeviation {
     deviationid: string

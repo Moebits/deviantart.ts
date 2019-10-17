@@ -1,4 +1,4 @@
-import {DeviantArtDeviation, DeviantArtUser} from "./../dist/types"
+import {DeviantArtDeviation, DeviantArtUser} from "../types"
 
 export interface DeviantArtCuratedTags {
     results: {
