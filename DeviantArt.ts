@@ -1,6 +1,10 @@
 import api from "./api/api"
 import {Browse, Collections, Comments, Curated, Data, Deviation, Gallery, RSS, Stash, User, Util} from "./endpoints"
-import {DeviantArtAuth, DeviantArtDeviation} from "./types"
+import {DeviantArtAuth, DeviantArtCategoryTree, DeviantArtComment, DeviantArtCommentContext, DeviantArtCommentSearch,
+DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDeviation, DeviantArtFolders, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults,
+DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile,
+DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent, DeviationImageRSS, DeviationMetaData,
+DeviationRSS, DeviationThumbnailRSS, DeviationWhoFaved} from "./types"
 export default class DeviantArt {
     public static accessToken: string
     public rss =  new RSS(DeviantArt.accessToken)
@@ -57,5 +61,9 @@ export default class DeviantArt {
 }
 
 module.exports.default = DeviantArt
-export * from "./types"
-export * from "./endpoints"
+export {DeviantArtAuth, DeviantArtCategoryTree, DeviantArtComment, DeviantArtCommentContext, DeviantArtCommentSearch,
+DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDeviation, DeviantArtFolders, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults,
+DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile,
+DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent, DeviationImageRSS, DeviationMetaData,
+DeviationRSS, DeviationThumbnailRSS, DeviationWhoFaved} from "./types"
+export {Browse, Collections, Comments, Curated, Data, Deviation, Gallery, RSS, Stash, User, Util} from "./endpoints"
