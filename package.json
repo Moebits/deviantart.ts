@@ -1,6 +1,6 @@
 {
   "name": "deviantart.ts",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Wrapper for the DeviantArt API with typings",
   "main": "dist/deviantart.js",
   "types": "dist/deviantart.d.ts",

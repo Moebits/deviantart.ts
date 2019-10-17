@@ -7,11 +7,12 @@ export class RSS {
     public get = async (deviationURL: string): Promise<DeviationRSS> => {
         const deviantInfo = await api.parseUrl(deviationURL)
         if (!deviantInfo.title) {
-            const jsonQuery = await api.getRSS({q: deviationURL, type: "deviation", access_token: this.accessToken}, 1)
+            const query = `${deviationURL.trim().replace(/ +/g, "-")}`
+            const jsonQuery = await api.getRSS({q: query, type: "deviation", access_token: this.accessToken}, 1)
             if (jsonQuery[0]) return api.formatJSON(JSON.stringify(jsonQuery[0]))
             return Promise.reject("No results were found, try searching with another query.")
         }
-        const query = `by:${deviantInfo.user}+${deviantInfo.title.trim()}+sort:Apopular`
+        const query = `by:${deviantInfo.user}+${deviantInfo.title.trim().replace(/ +/g, "-")}`
         const json = await api.getRSS({q: query, type: "deviation", access_token: this.accessToken}, 1000)
         const parsed: DeviationRSS[] = []
         for (let i = 0; i < json.length; i++) {

@@ -11,7 +11,7 @@ describe("RSS", async function() {
     })
 
     it("should get from a URL", async function() {
-        const result = await deviantArt.rss.get("https://www.deviantart.com/rkasai14/art/Eromanga-sensei-3V-3-4--716752756")
+        const result = await deviantArt.rss.get("https://www.deviantart.com/fhilippe124/art/Sagiri-Izumi-Eromanga-sensei-fanart-678288299")
         assert(result.hasOwnProperty("thumbnails"))
     })
 
