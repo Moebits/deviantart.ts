@@ -13,6 +13,11 @@ npm install deviantart.ts
 ### Getting Started
 Register an app at [**DeviantArt Developers**](https://www.deviantart.com/developers/) in order to receive a **client id** and a **client secret**. You will need these credentials in order to receive an **access token** from the DeviantArt API. Read the official api [**documentation**](https://www.deviantart.com/developers/http/v1/20160316) for information on all of the endpoints, the parameters that they take, and the responses that they send. This library only covers the client credentials endpoints.
 
+### Useful Links
+
+- [**Official DeviantArt Documentation**](https://www.deviantart.com/developers/http/v1/20160316)
+- [**DeviantArt.ts Documentation**](https://tenpi.github.io/deviantart.ts/)
+
 #### Searching for Deviations
 ```ts
 import DeviantArt from "deviantart.ts"
