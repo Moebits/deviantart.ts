@@ -1,10 +1,13 @@
 import api from "./api/api"
 import {Browse, Collections, Comments, Curated, Data, Deviation, Gallery, RSS, Stash, User, Util} from "./endpoints/index"
+import {deviantArt} from "./test/login"
+import {DeviantArtDeviationExtended} from "./types/DeviationTypes"
 import {DeviantArtAuth, DeviantArtCategoryTree, DeviantArtComment, DeviantArtCommentContext, DeviantArtCommentSearch,
 DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDeviation, DeviantArtFolders, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults,
 DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile,
 DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent, DeviationImageRSS, DeviationMetaData,
 DeviationRSS, DeviationThumbnailRSS, DeviationWhoFaved} from "./types/index"
+import {DeviationRSSExtended} from "./types/RSSTypes"
 
 /**
  * This is the main class for interacting with the DeviantArt API.
@@ -70,6 +73,39 @@ export default class DeviantArt {
         } else {
             return Promise.reject("The url is invalid.")
         }
+    }
+
+    /**
+     * Extends an array of deviations by adding the description, keywords, and copyright
+     * info obtained from the RSS feed.
+     */
+    public extendDeviations = async (deviations: DeviantArtDeviation[]) => {
+        const deviationArray: DeviantArtDeviationExtended[] = []
+        for (let i = 0; i < deviations.length; i++) {
+            const rssDeviation = await this.rss.get(deviations[i].url)
+            const extendedDeviation  = deviations[i] as DeviantArtDeviationExtended
+            extendedDeviation.description = rssDeviation.description
+            extendedDeviation.keywords = rssDeviation.keywords
+            extendedDeviation.copyright = rssDeviation.copyright
+            deviationArray.push(extendedDeviation)
+        }
+        return deviationArray
+    }
+
+    /**
+     * Extends an array of deviations from the RSS feed by appending the [[DeviantArtUserProfile]]
+     * object from the api call. Overwrites the author property.
+     */
+    public extendRSSDeviations = async (deviationsRSS: DeviationRSS[]) => {
+        const deviationArray: DeviationRSSExtended[] = []
+        for (let i = 0; i < deviationsRSS.length; i++) {
+            const {user} = api.parseUrl(deviationsRSS[i].url)
+            const deviantUser = await deviantArt.user.profile({username: user})
+            const extendedDeviation = deviationsRSS[i] as unknown as DeviationRSSExtended
+            extendedDeviation.author = deviantUser
+            deviationArray.push(extendedDeviation)
+        }
+        return deviationArray
     }
 }
 

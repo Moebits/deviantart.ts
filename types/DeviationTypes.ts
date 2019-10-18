@@ -153,3 +153,9 @@ export interface DeviationEmbeddedContent {
     prev_offset: number
     results: DeviantArtDeviation[]
 }
+
+export interface DeviantArtDeviationExtended extends DeviantArtDeviation {
+    description: string
+    keywords: string[]
+    copyright: string
+}

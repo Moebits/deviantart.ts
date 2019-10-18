@@ -1,6 +1,6 @@
 {
   "name": "deviantart.ts",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "Wrapper for the DeviantArt API with typings",
   "main": "dist/deviantart.js",
   "types": "dist/deviantart.d.ts",
@@ -38,10 +38,10 @@
     "ts-mocha": "^6.0.0",
     "typedoc": "^0.15.0",
     "typedoc-dark-theme": "0.0.11",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "@tenpi/typedoc": "0.0.3"
   },
   "dependencies": {
-    "@tenpi/typedoc": "0.0.3",
     "axios": "^0.19.0",
     "html-entities": "^1.2.1",
     "xml2js": "^0.4.22"

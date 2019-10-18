@@ -1,3 +1,4 @@
+import {DeviantArtUserProfile} from "./UserTypes"
 export interface DeviationRSS {
     title: string
     url: string
@@ -24,4 +25,8 @@ export interface DeviationImageRSS {
     height: string
     width: string
     medium: string
+}
+
+export interface DeviationRSSExtended extends Omit<DeviationRSS, "author"> {
+    author: DeviantArtUserProfile
 }
