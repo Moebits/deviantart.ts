@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviantArtCurated, DeviantArtCuratedTags} from "../types"
+import {DeviantArtCurated, DeviantArtCuratedTags} from "../types/index"
 
 export class Curated {
     private readonly api = new api(this.accessToken)

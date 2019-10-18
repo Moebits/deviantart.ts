@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviantArtStash, DeviantArtStashItem} from "../types"
+import {DeviantArtStash, DeviantArtStashItem} from "../types/index"
 
 export class Stash {
     private readonly api = new api(this.accessToken)

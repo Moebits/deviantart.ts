@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {GalleryAll, GalleryFolders, GalleryResult} from "../types"
+import {GalleryAll, GalleryFolders, GalleryResult} from "../types/index"
 
 export class Gallery {
     private readonly api = new api(this.accessToken)

@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile, DeviantArtUserStatuses, DeviantArtWatchers} from "../types"
+import {DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile, DeviantArtUserStatuses, DeviantArtWatchers} from "../types/index"
 
 export class User {
     private readonly api = new api(this.accessToken)

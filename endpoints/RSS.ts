@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviationRSS} from "./../types"
+import {DeviationRSS} from "../types/index"
 
 export class RSS {
     constructor(private readonly accessToken: string) {}

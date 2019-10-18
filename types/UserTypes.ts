@@ -1,4 +1,4 @@
-import {DeviantArtDeviation, DeviantArtUser} from "../types"
+import {DeviantArtDeviation, DeviantArtUser} from "../types/index"
 
 export interface DeviantArtUser {
     userid: string

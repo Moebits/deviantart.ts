@@ -9,6 +9,9 @@ const rssUrl = "https://backend.deviantart.com/rss.xml"
 export default class Api {
     constructor(private readonly accessToken: string) {}
 
+    /**
+     * Gets an endpoint from the DeviantArt api.
+     */
     public get = async (endpoint: string, params: any) => {
         params = params.params ? params.params : params
         params.access_token = this.accessToken
@@ -17,12 +20,18 @@ export default class Api {
         return result
     }
 
+    /**
+     * Used internally to get the access token in [[login]]
+     */
     public static getNoLogin = async (endpoint: string, params: any) => {
         const url = apiURL + endpoint
         const result = await axios.get(url, {params}).then((r) => r.data)
         return result
     }
 
+    /**
+     * Parses the title, user, and numeric id from a url.
+     */
     public static parseUrl = async (url: string) => {
         let title = url.match(/(?<=art\/)(.*?)(?=\d{5})/g) ? url.match(/(?<=art\/)(.*?)(?=\d{5})/)[0].replace(/-/g, " ") : null
         const user = url.match(/(?<=com\/)(.*?)(?=\/art)/g) ? url.match(/(?<=com\/)(.*?)(?=\/art)/)[0] : null
@@ -34,6 +43,9 @@ export default class Api {
         return {title, user, id}
     }
 
+    /**
+     * Fetches xml from the RSS api and converts it to json.
+     */
     public static getRSS = async (params: any, limit?: number) => {
         const xml = await axios.get(rssUrl, {params}).then((r) => r.data)
         const json = await parseStringPromise(xml).then((r) => r.rss.channel[0] ? r.rss.channel[0].item : null)
@@ -46,6 +58,9 @@ export default class Api {
         return jsonArray.filter(Boolean)
     }
 
+    /**
+     * Cleans html by stripping tags and entities.
+     */
     public static cleanHTML = (str: string) => {
         if (!str) return ""
         const replaced = str.replace(/<[^>]*>?/gm, "")
@@ -54,6 +69,9 @@ export default class Api {
         return html.decode(replaced)
     }
 
+    /**
+     * Formats the raw json received to a more friendly version.
+     */
     public static formatJSON = (json: string): DeviationRSS => {
         const parsed = JSON.parse(json)
         const title = parsed["media:title"] ? parsed["media:title"][0]._ : null

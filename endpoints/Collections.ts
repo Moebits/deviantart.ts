@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviantArtFolders, DeviantArtSearchResults} from "../types"
+import {DeviantArtFolders, DeviantArtSearchResults} from "../types/index"
 
 export class Collections {
     private readonly api = new api(this.accessToken)

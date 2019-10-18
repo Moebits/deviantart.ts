@@ -1,13 +1,18 @@
 {
     "compilerOptions": {
         "outDir": "dist",
-        "declaration": true
+        "declaration": true,
+        "module": "es6",
+        "target": "es3",
+        "experimentalDecorators": true,
+        "moduleResolution": "node"
     },
 
     "typedocOptions": {
         "mode": "file",
         "out": "docs",
         "exclude": ["node_modules", "dist"],
-        "ignoreCompilerErrors": true
+        "ignoreCompilerErrors": true,
+        "includeDeclarations": true
     }
 }

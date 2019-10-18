@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviantArtCommentContext, DeviantArtCommentSearch} from "../types"
+import {DeviantArtCommentContext, DeviantArtCommentSearch} from "../types/index"
 
 export class Comments {
     private readonly api = new api(this.accessToken)

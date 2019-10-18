@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviantArtDeviation} from "../types"
+import {DeviantArtDeviation} from "../types/index"
 import {DeviantArtCategoryTree, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults, DeviantArtSearchResults} from "./../types/BrowseTypes"
 
 export class Browse {
