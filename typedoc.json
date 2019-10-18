@@ -5,5 +5,5 @@
     "ignoreCompilerErrors": true,
     "externalPattern": "**/node_modules/**",
     "excludeExternals": true,
-    "theme": "./node_modules/typedoc-dark-theme/bin/default/"
+    "theme": "./node_modules/@tenpi/typedoc/bin/default/"
 }
