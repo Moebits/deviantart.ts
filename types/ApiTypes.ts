@@ -4,3 +4,17 @@ export interface DeviantArtAuth {
     expires_in: number
     status: string
 }
+
+export interface ParsedURL {
+    title: string | null
+    user: string | null
+    id: string | null
+}
+
+export interface DeviantArtData {
+    text: string
+}
+
+export interface DeviantArtPlacebo {
+    status: string
+}

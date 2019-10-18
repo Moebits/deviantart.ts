@@ -8,8 +8,8 @@ export class Collections {
     /**
      * Gets all of the deviations in a folder. Unless if you are searching for your own folders, you must specify the username of the user.
      */
-    public get = async (folderid: string, params?: {username?: string, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/collections/${folderid}`, {params})
+    public get = async (params: {folderid: string, username?: string, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/collections/${params.folderid}`, {params})
         return result as Promise<DeviantArtSearchResults>
     }
 

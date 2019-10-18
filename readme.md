@@ -40,22 +40,21 @@ async function useAPI() {
     But you can only get the deviation id through the api, so use this instead if you need it.*/
     const verySlow = await deviantArt.findByIteration("https://www.deviantart.com/fhilippe124/art/Yamada-Elf-Eromanga-sensei-fanart-678701561")
 
-    /*The browse endpoint offers searches for popular, newest, hot, undiscovered, etc. deviations.
-    All of the parameters in the params object are optional.*/
+    /*The browse endpoint offers searches for popular, newest, hot, undiscovered, etc. deviations.*/
     const popular = await deviantArt.browse.popular({q: "anime"})
     const hot = await deviantArt.browse.hot({category_path: "manga"})
     //The date is in yyyy-mm-dd format!
     const daily = await deviantArt.browse.daily({date: 2019-07-03})
-    const tag = await deviantArt.browse.tag("cute")
+    const tag = await deviantArt.browse.tag({tag: "cute"})
     const undiscovered = await deviantArt.browse.undiscovered({mature_content: true})
 
     /*In order to use the deviation endpoint, you must 
     have the deviation id. In this case, findByIteration()
     is very useful.*/
-    const deviationByID = await deviantArt.deviation.get("1FA35A6D-E2CD-3CDF-1A65-410AB577BF10")
+    const deviationByID = await deviantArt.deviation.get({deviationid: "1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"})
 
-    /*The moreLikeThis endpoint also uses an id.*/
-    const moreLikeThis = await deviantArt.browse.moreLikeThis("1FA35A6D-E2CD-3CDF-1A65-410AB577BF10")
+    /*The moreLikeThis endpoint takes a deviationid (which is called a seed in the api for some reason).*/
+    const moreLikeThis = await deviantArt.browse.moreLikeThis({seed: "1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"})
 
 }
 useAPI()
@@ -64,7 +63,7 @@ useAPI()
 ```ts
 async function useAPI() {
     /*Search for a user's profile*/
-    const user = await deviantArt.user.get("tenpii")
+    const user = await deviantArt.user.get({username: "tenpii"})
 
     /*Get all of a user's deviations.*/
     const userDeviations = await deviantArt.gallery.all({username: "tenpii"})
@@ -80,20 +79,20 @@ async function useAPI() {
 
     /*Get all deviations in the folder. You must have the folder id, which you can get from the api call above.
     The username parameter is only optional if you are searching your own folders.*/
-    const folderDeviations = await deviantArt.collections.get("79216EF7-CED7-6973-DD90-6793348AD2A4", {username: "fhilippe124"})
+    const folderDeviations = await deviantArt.collections.get({folderid: "79216EF7-CED7-6973-DD90-6793348AD2A4", username: "fhilippe124"})
 }
 ```
 #### Searching for Comments and Tags
 ```ts
 async function useAPI() {
     /*Note that the deviation id is required for this endpoint.*/
-    const comments = await deviantArt.comments.deviation("1FA35A6D-E2CD-3CDF-1A65-410AB577BF10")
+    const comments = await deviantArt.comments.deviation({deviationid: "1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"})
 
     /*To get sibling comments, you must have the comment id, which you can get from the api call above.*/
-    const userDeviations = await deviantArt.comments.siblings("FE5A83B8-0495-9E1D-3A54-864D943D579C")
+    const userDeviations = await deviantArt.comments.siblings({commentid: "FE5A83B8-0495-9E1D-3A54-864D943D579C"})
 
     /*To search for tags, you can use the browse endpoint.*/
-    const tagSearch = await deviantArt.browse.tagSearch("kawaii")
+    const tagSearch = await deviantArt.browse.tagSearch({tag_name: "kawaii"})
 }
 ```
 #### Other endpoints and parameters

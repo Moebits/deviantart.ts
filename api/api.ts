@@ -1,6 +1,7 @@
 import axios, {AxiosRequestConfig} from "axios"
 import {Html5Entities} from "html-entities"
 import {parseStringPromise} from "xml2js"
+import {ParsedURL} from "./../types/ApiTypes"
 import {DeviationRSS} from "./../types/RSSTypes"
 
 const apiURL = "https://www.deviantart.com/"
@@ -16,6 +17,7 @@ export default class Api {
         params = params.params ? params.params : params
         params.access_token = this.accessToken
         const url = apiURL + endpoint
+        console.log(params)
         const result = await axios.get(url, {params} as AxiosRequestConfig).then((r) => r.data)
         return result
     }
@@ -32,7 +34,7 @@ export default class Api {
     /**
      * Parses the title, user, and numeric id from a url.
      */
-    public static parseUrl = async (url: string) => {
+    public static parseUrl = (url: string): ParsedURL => {
         let title = url.match(/(?<=art\/)(.*?)(?=\d{5})/g) ? url.match(/(?<=art\/)(.*?)(?=\d{5})/)[0].replace(/-/g, " ") : null
         const user = url.match(/(?<=com\/)(.*?)(?=\/art)/g) ? url.match(/(?<=com\/)(.*?)(?=\/art)/)[0] : null
         const id = url.match(/\d{5,}/) ? url.match(/\d{5,}/)[0] : null

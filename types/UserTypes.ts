@@ -128,3 +128,7 @@ export interface DeviantArtWatchers {
         }
     }>
 }
+
+export interface DeviantArtFriendSearch {
+    results: DeviantArtUser[]
+}

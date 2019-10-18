@@ -28,3 +28,13 @@ export interface DeviantArtQueryResults {
     estimated_total?: number
     results: DeviantArtDeviation[]
 }
+
+export interface DeviantArtTagSearch {
+    results: {
+        tag_name: string[]
+    }
+}
+
+export interface DeviantArtDailySearch {
+    results: DeviantArtDeviation[]
+}

@@ -8,16 +8,16 @@ export class Stash {
     /**
      * Fetches a stash from its stack id.
      */
-    public get = async (stackid: string, params?: {mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/stash/${stackid}`, {stackid, params})
+    public get = async (params: {stackid: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/stash/${params.stackid}`, {params})
         return result as Promise<DeviantArtStash>
     }
 
     /**
      * Fetches an item using its item id.
      */
-    public item = async (itemid: string, params?: {ext_submission?: boolean, ext_camera?: boolean, ext_stats?: boolean, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/stash/item/${itemid}`, {params})
+    public item = async (params: {itemid: string, ext_submission?: boolean, ext_camera?: boolean, ext_stats?: boolean, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/stash/item/${params.itemid}`, {params})
         return result as Promise<DeviantArtStashItem>
     }
 }

@@ -1,6 +1,6 @@
 import api from "../api/api"
-import {DeviantArtDeviation} from "../types/index"
-import {DeviantArtCategoryTree, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults, DeviantArtSearchResults} from "./../types/BrowseTypes"
+import {DeviantArtCategoryTree, DeviantArtDailySearch, DeviantArtMoreLikeThisPreview,
+DeviantArtQueryResults, DeviantArtSearchResults, DeviantArtTagSearch} from "../types/BrowseTypes"
 
 export class Browse {
     private readonly api = new api(this.accessToken)
@@ -9,24 +9,24 @@ export class Browse {
     /**
      * This will fetch all of the category paths that you can use in the `category_path` parameter.
      */
-    public categoryTree = async (catpath: string, params?: {mature_content?: string}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/categorytree`, {catpath, params})
+    public categoryTree = async (params: {catpath: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/browse/categorytree`, {params})
         return result as Promise<DeviantArtCategoryTree>
     }
 
     /**
      * Gets similar deviations to the one specified. Requires the deviation id.
      */
-    public moreLikeThis = async (seed: string, params?: {category?: string, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis`, {seed, params})
+    public moreLikeThis = async (params: {seed: string, category?: string, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis`, {params})
         return result as Promise<DeviantArtSearchResults>
     }
 
     /**
      * Same as [[moreLikeThis]] but returns the preview result.
      */
-    public moreLikeThisPreview = async (seed: string, params?: {expand?: string, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis/preview`, {seed, params})
+    public moreLikeThisPreview = async (params: {seed: string, expand?: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/browse/morelikethis/preview`, {params})
         return result as Promise<DeviantArtMoreLikeThisPreview>
     }
 
@@ -35,30 +35,30 @@ export class Browse {
      */
     public daily = async (params?: {date?: string, expand?: string, mature_content?: boolean}) => {
         const result = await this.api.get(`api/v1/oauth2/browse/dailydeviations`, {params})
-        return result as Promise<{results: DeviantArtDeviation[]}>
+        return result as Promise<DeviantArtDailySearch>
     }
 
     /**
      * Searches deviations using a tag.
      */
-    public tag = async (tag: string, params?: {offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/tags`, {tag, params})
+    public tag = async (params: {tag: string, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/browse/tags`, {params})
         return result as Promise<DeviantArtQueryResults>
     }
 
     /**
      * Searches a tag for similar tags.
      */
-    public tagSearch = async (tag_name: string, params?: {mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/tags/search`, {tag_name, params})
-        return result as Promise<{results: {tag_name: string[]}}>
+    public tagSearch = async (params: {tag_name: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/browse/tags/search`, {params})
+        return result as Promise<DeviantArtTagSearch>
     }
 
     /**
      * Searches the journals of a user.
      */
-    public userJournals = async (username: string, params?: {featured?: boolean, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/browse/user/journals`, {username, params})
+    public userJournals = async (params: {username: string, featured?: boolean, offset?: number, limit?: number, expand?: string, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/browse/user/journals`, {params})
         return result as Promise<DeviantArtSearchResults>
     }
 

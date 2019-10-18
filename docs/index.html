@@ -63,7 +63,7 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p><img src="../images/deviantart.tslogo.gif" alt="DeviantArt.ts"></p>
+				<p><img src="images/deviantart.tslogo.gif" alt="DeviantArt.ts"></p>
 				<p><a href="https://nodei.co/npm/deviantart.ts/"><img src="https://nodei.co/npm/deviantart.ts.png" alt="NPM"></a></p>
 				<a href="#about" id="about" style="color: inherit; text-decoration: none;">
 					<h3>About</h3>
@@ -107,22 +107,21 @@
     But you can only get the deviation id through the api, so use this instead if you need it.*/</span>
     <span class="hljs-keyword">const</span> verySlow = <span class="hljs-keyword">await</span> deviantArt.findByIteration(<span class="hljs-string">"https://www.deviantart.com/fhilippe124/art/Yamada-Elf-Eromanga-sensei-fanart-678701561"</span>)
 
-    <span class="hljs-comment">/*The browse endpoint offers searches for popular, newest, hot, undiscovered, etc. deviations.
-    All of the parameters in the params object are optional.*/</span>
+    <span class="hljs-comment">/*The browse endpoint offers searches for popular, newest, hot, undiscovered, etc. deviations.*/</span>
     <span class="hljs-keyword">const</span> popular = <span class="hljs-keyword">await</span> deviantArt.browse.popular({q: <span class="hljs-string">"anime"</span>})
     <span class="hljs-keyword">const</span> hot = <span class="hljs-keyword">await</span> deviantArt.browse.hot({category_path: <span class="hljs-string">"manga"</span>})
     <span class="hljs-comment">//The date is in yyyy-mm-dd format!</span>
     <span class="hljs-keyword">const</span> daily = <span class="hljs-keyword">await</span> deviantArt.browse.daily({date: <span class="hljs-number">2019</span><span class="hljs-number">-07</span><span class="hljs-number">-03</span>})
-    <span class="hljs-keyword">const</span> tag = <span class="hljs-keyword">await</span> deviantArt.browse.tag(<span class="hljs-string">"cute"</span>)
+    <span class="hljs-keyword">const</span> tag = <span class="hljs-keyword">await</span> deviantArt.browse.tag({tag: <span class="hljs-string">"cute"</span>})
     <span class="hljs-keyword">const</span> undiscovered = <span class="hljs-keyword">await</span> deviantArt.browse.undiscovered({mature_content: <span class="hljs-literal">true</span>})
 
     <span class="hljs-comment">/*In order to use the deviation endpoint, you must 
     have the deviation id. In this case, findByIteration()
     is very useful.*/</span>
-    <span class="hljs-keyword">const</span> deviationByID = <span class="hljs-keyword">await</span> deviantArt.deviation.get(<span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>)
+    <span class="hljs-keyword">const</span> deviationByID = <span class="hljs-keyword">await</span> deviantArt.deviation.get({deviationid: <span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>})
 
-    <span class="hljs-comment">/*The moreLikeThis endpoint also uses an id.*/</span>
-    <span class="hljs-keyword">const</span> moreLikeThis = <span class="hljs-keyword">await</span> deviantArt.browse.moreLikeThis(<span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>)
+    <span class="hljs-comment">/*The moreLikeThis endpoint takes a deviationid (which is called a seed in the api for some reason).*/</span>
+    <span class="hljs-keyword">const</span> moreLikeThis = <span class="hljs-keyword">await</span> deviantArt.browse.moreLikeThis({seed: <span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>})
 
 }
 useAPI()</code></pre>
@@ -131,7 +130,7 @@ useAPI()</code></pre>
 				</a>
 				<pre><code class="language-ts"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useAPI</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-comment">/*Search for a user's profile*/</span>
-    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> deviantArt.user.get(<span class="hljs-string">"tenpii"</span>)
+    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> deviantArt.user.get({username: <span class="hljs-string">"tenpii"</span>})
 
     <span class="hljs-comment">/*Get all of a user's deviations.*/</span>
     <span class="hljs-keyword">const</span> userDeviations = <span class="hljs-keyword">await</span> deviantArt.gallery.all({username: <span class="hljs-string">"tenpii"</span>})
@@ -147,20 +146,20 @@ useAPI()</code></pre>
 
     <span class="hljs-comment">/*Get all deviations in the folder. You must have the folder id, which you can get from the api call above.
     The username parameter is only optional if you are searching your own folders.*/</span>
-    <span class="hljs-keyword">const</span> folderDeviations = <span class="hljs-keyword">await</span> deviantArt.collections.get(<span class="hljs-string">"79216EF7-CED7-6973-DD90-6793348AD2A4"</span>, {username: <span class="hljs-string">"fhilippe124"</span>})
+    <span class="hljs-keyword">const</span> folderDeviations = <span class="hljs-keyword">await</span> deviantArt.collections.get({folderid: <span class="hljs-string">"79216EF7-CED7-6973-DD90-6793348AD2A4"</span>, username: <span class="hljs-string">"fhilippe124"</span>})
 }</code></pre>
 				<a href="#searching-for-comments-and-tags" id="searching-for-comments-and-tags" style="color: inherit; text-decoration: none;">
 					<h4>Searching for Comments and Tags</h4>
 				</a>
 				<pre><code class="language-ts"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useAPI</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-comment">/*Note that the deviation id is required for this endpoint.*/</span>
-    <span class="hljs-keyword">const</span> comments = <span class="hljs-keyword">await</span> deviantArt.comments.deviation(<span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>)
+    <span class="hljs-keyword">const</span> comments = <span class="hljs-keyword">await</span> deviantArt.comments.deviation({deviationid: <span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>})
 
     <span class="hljs-comment">/*To get sibling comments, you must have the comment id, which you can get from the api call above.*/</span>
-    <span class="hljs-keyword">const</span> userDeviations = <span class="hljs-keyword">await</span> deviantArt.comments.siblings(<span class="hljs-string">"FE5A83B8-0495-9E1D-3A54-864D943D579C"</span>)
+    <span class="hljs-keyword">const</span> userDeviations = <span class="hljs-keyword">await</span> deviantArt.comments.siblings({commentid: <span class="hljs-string">"FE5A83B8-0495-9E1D-3A54-864D943D579C"</span>})
 
     <span class="hljs-comment">/*To search for tags, you can use the browse endpoint.*/</span>
-    <span class="hljs-keyword">const</span> tagSearch = <span class="hljs-keyword">await</span> deviantArt.browse.tagSearch(<span class="hljs-string">"kawaii"</span>)
+    <span class="hljs-keyword">const</span> tagSearch = <span class="hljs-keyword">await</span> deviantArt.browse.tagSearch({tag_name: <span class="hljs-string">"kawaii"</span>})
 }</code></pre>
 				<a href="#other-endpoints-and-parameters" id="other-endpoints-and-parameters" style="color: inherit; text-decoration: none;">
 					<h4>Other endpoints and parameters</h4>
@@ -387,13 +386,25 @@ useAPI()</code></pre>
 						<a href="interfaces/deviantartcuratedtags.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Curated<wbr>Tags</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/deviantartdailysearch.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Daily<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deviantartdata.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/deviantartdeviation.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Deviation</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/deviantartfolders.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Folders</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/deviantartfriendsearch.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Friend<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/deviantartmorelikethispreview.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>More<wbr>Like<wbr>This<wbr>Preview</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deviantartplacebo.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Placebo</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/deviantartqueryresults.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Query<wbr>Results</a>
@@ -409,6 +420,9 @@ useAPI()</code></pre>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/deviantartstatus.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/deviantarttagsearch.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Tag<wbr>Search</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/deviantartuser.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>User</a>
@@ -457,6 +471,9 @@ useAPI()</code></pre>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/galleryresult.html" class="tsd-kind-icon">Gallery<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/parsedurl.html" class="tsd-kind-icon">ParsedURL</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#apiurl" class="tsd-kind-icon">apiURL</a>

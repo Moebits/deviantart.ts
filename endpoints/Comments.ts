@@ -24,16 +24,16 @@ export class Comments {
     /**
      * Fetches all the comments on a user profile.
      */
-    public profile = async (username: string, params?: {commentid?: string, maxdepth?: number, offset?: number, limit?: number, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/comments/profile/${username}`, {params})
+    public profile = async (params: {username: string, commentid?: string, maxdepth?: number, offset?: number, limit?: number, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/comments/profile/${params.username}`, {params})
         return result as Promise<DeviantArtCommentSearch>
     }
 
     /**
      * Fetches all the comments on a user status.
      */
-    public status = async (statusid: string, params?: {commentid?: string, maxdepth?: number, offset?: number, limit?: number, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/comments/status/${statusid}`, {params})
+    public status = async (params: {statusid: string, commentid?: string, maxdepth?: number, offset?: number, limit?: number, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/comments/status/${params.statusid}`, {params})
         return result as Promise<DeviantArtCommentSearch>
     }
 }
