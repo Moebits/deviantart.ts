@@ -237,6 +237,46 @@ export interface DeviantArtUser {
 </details>
 
 <details>
+<summary>DeviantArtUserProfile</summary>
+
+```ts
+export interface DeviantArtUserProfile {
+    user: DeviantArtUser
+    is_watching: boolean
+    profile_url: string
+    user_is_artist: boolean
+    artist_level: string | null
+    artist_specialty: string | null
+    real_name: string
+    tagline: string
+    countryid: number
+    country: string
+    website: string
+    bio: string
+    cover_photo: string | null
+    profile_pic: DeviantArtDeviation | null
+    last_status: DeviantArtStatus | null
+    stats: {
+        user_deviations: number
+        user_favourites: number
+        user_comments: number
+        profile_pageviews: number
+        profile_comments: number
+    }
+    collections?: Array<{
+        folderid: string
+        name: string
+    }>
+    galleries?: Array<{
+        folderid: string
+        parent: string | null
+        name: string
+    }>
+}
+```
+</details>
+
+<details>
 <summary>DeviantArtComment</summary>
     
 ```ts

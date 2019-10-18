@@ -1,13 +1,12 @@
 import api from "./api/api"
 import {Browse, Collections, Comments, Curated, Data, Deviation, Gallery, RSS, Stash, User, Util} from "./endpoints/index"
 import {deviantArt} from "./test/login"
-import {DeviantArtDeviationExtended} from "./types/DeviationTypes"
 import {DeviantArtAuth, DeviantArtCategoryTree, DeviantArtComment, DeviantArtCommentContext, DeviantArtCommentSearch,
-DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDeviation, DeviantArtFolders, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults,
-DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile,
-DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent, DeviationImageRSS, DeviationMetaData,
-DeviationRSS, DeviationThumbnailRSS, DeviationWhoFaved} from "./types/index"
-import {DeviationRSSExtended} from "./types/RSSTypes"
+DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDailySearch, DeviantArtData, DeviantArtDeviation, DeviantArtDeviationExtended,
+DeviantArtFolders, DeviantArtFriendSearch, DeviantArtGalleryAll, DeviantArtGalleryFolders, DeviantArtGalleryResult, DeviantArtMoreLikeThisPreview, DeviantArtPlacebo,
+DeviantArtQueryResults, DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtTagSearch, DeviantArtUser,
+DeviantArtUserFriends, DeviantArtUserProfile, DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent,
+DeviationImageRSS, DeviationMetaData, DeviationRSS, DeviationRSSExtended, DeviationThumbnailRSS, DeviationWhoFaved} from "./types/index"
 
 /**
  * This is the main class for interacting with the DeviantArt API.
@@ -111,8 +110,9 @@ export default class DeviantArt {
 
 module.exports.default = DeviantArt
 export {DeviantArtAuth, DeviantArtCategoryTree, DeviantArtComment, DeviantArtCommentContext, DeviantArtCommentSearch,
-DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDeviation, DeviantArtFolders, DeviantArtMoreLikeThisPreview, DeviantArtQueryResults,
-DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtUser, DeviantArtUserFriends, DeviantArtUserProfile,
-DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent, DeviationImageRSS, DeviationMetaData,
-DeviationRSS, DeviationThumbnailRSS, DeviationWhoFaved} from "./types/index"
+DeviantArtCurated, DeviantArtCuratedTags, DeviantArtDailySearch, DeviantArtData, DeviantArtDeviation, DeviantArtDeviationExtended,
+DeviantArtFolders, DeviantArtFriendSearch, DeviantArtGalleryAll, DeviantArtGalleryFolders, DeviantArtGalleryResult, DeviantArtMoreLikeThisPreview, DeviantArtPlacebo,
+DeviantArtQueryResults, DeviantArtSearchResults, DeviantArtStash, DeviantArtStashItem, DeviantArtStatus, DeviantArtTagSearch, DeviantArtUser,
+DeviantArtUserFriends, DeviantArtUserProfile, DeviantArtUserStatuses, DeviantArtWatchers, DeviationContent, DeviationDownload, DeviationEmbeddedContent,
+DeviationImageRSS, DeviationMetaData, DeviationRSS, DeviationRSSExtended, DeviationThumbnailRSS, DeviationWhoFaved} from "./types/index"
 export {Browse, Collections, Comments, Curated, Data, Deviation, Gallery, RSS, Stash, User, Util} from "./endpoints/index"
