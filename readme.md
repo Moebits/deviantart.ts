@@ -97,7 +97,7 @@ async function useAPI() {
 ```
 #### Other endpoints and parameters
 There are many more less commonly used endpoints such as **Curated**, **Stash**, and **Data**. For a more complete documentation please read the [**api documentation**](https://www.deviantart.com/developers/http/v1/20160316) on DeviantArt.
-###### Common Parameters:
+##### Common Parameters:
 - `mature_content` - set to true to include mature results.
 - `expand` - Expands the response objects, such as including `user.details` in a `DeviantArtUser` object. You may need to use type assertions if you use.
 - `offset` - Returns results starting from the offset
@@ -251,3 +251,22 @@ export interface DeviantArtComment {
 }
 ```
 </details>
+
+#### Extending Deviations
+The API Deviation object and the RSS Deviation object are missing a couple properties from each other, 
+most notably the deviation description and the author's profile info respectively. There are some extending
+functions that will extend the objects to add these missing properties.
+```ts
+async function useAPI() {
+    const deviation = await deviantArt.deviation.get({deviationid: "1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"})
+    /*Takes an array of DeviantArtDeviation objects*/
+    const extendedAPIDeviations = await deviantArt.extendDeviations([deviation])
+    //It now has a description!
+    extendedAPIDeviations[0].description
+
+    const deviationsRSS = await deviantArt.rss.search("anime", 10, "popular")
+    const extendedRSSDeviations = await deviantArt.extendRSSDeviations(deviationsRSS)
+    //It now has the author's profile info, such as profile picture and cover photo!
+    extendedRSSDeviations[0].author.profile_pic
+}
+```
