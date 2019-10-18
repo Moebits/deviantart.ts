@@ -8,16 +8,16 @@ export class Comments {
     /**
      * Fetches all of the replies to a certain comment, requires the comment id.
      */
-    public siblings = async (commentid: string, params?: {ext_item?: boolean, offset?: number, limit?: number, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/comments/${commentid}/siblings`, {params})
+    public siblings = async (params: {commentid: string, ext_item?: boolean, offset?: number, limit?: number, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/comments/${params.commentid}/siblings`, {params})
         return result as Promise<DeviantArtCommentContext>
     }
 
     /**
      * Fetches all comments on a certain deviation.
      */
-    public deviation = async (deviationid: string, params?: {commentid?: string, maxdepth?: number, offset?: number, limit?: number, mature_content?: boolean}) => {
-        const result = await this.api.get(`api/v1/oauth2/comments/deviation/${deviationid}`, {params})
+    public deviation = async (params: {deviationid: string, commentid?: string, maxdepth?: number, offset?: number, limit?: number, mature_content?: boolean}) => {
+        const result = await this.api.get(`api/v1/oauth2/comments/deviation/${params.deviationid}`, {params})
         return result as Promise<DeviantArtCommentSearch>
     }
 

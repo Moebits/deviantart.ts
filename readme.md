@@ -98,19 +98,19 @@ async function useAPI() {
 #### Other endpoints and parameters
 There are many more less commonly used endpoints such as **Curated**, **Stash**, and **Data**. For a more complete documentation please read the [**api documentation**](https://www.deviantart.com/developers/http/v1/20160316) on DeviantArt.
 ###### Common Parameters:
-- `mature_content: boolean` - set to true to include mature results.
-- `expand: string` - Expands the response objects, such as including `user.details` in a `DeviantArtUser` object. You may need to use type assertions if you use.
-- `offset: number` - Returns results starting from the offset
-- `limit: number` - Returns a certain amount of results
-- `deviationid: string` - The deviation id. All id's look like: `1FA35A6D-E2CD-3CDF-1A65-410AB577BF10`.
-- `userid: string` - The user id. 
-- `commentid: string` - The comment id. 
-- `folderid: string` - The folder id.
-- `statusid: string` - The status id.
-- `category_path: string` - The category path to search.
-- `q: string` - The query to search.
-- `timerange: string` - Timerange to search Ex. `(8hr, 5days, 2weeks, alltime)`
-- `date: string` - The date in `yyyy-mm-dd` format
+- `mature_content` - set to true to include mature results.
+- `expand` - Expands the response objects, such as including `user.details` in a `DeviantArtUser` object. You may need to use type assertions if you use.
+- `offset` - Returns results starting from the offset
+- `limit` - Returns a certain amount of results
+- `deviationid` - The deviation id. All id's look like: `1FA35A6D-E2CD-3CDF-1A65-410AB577BF10`.
+- `userid` - The user id. 
+- `commentid` - The comment id. 
+- `folderid` - The folder id.
+- `statusid` - The status id.
+- `category_path` - The category path to search.
+- `q` - The query to search.
+- `timerange` - Timerange to search Ex. `(8hr, 5days, 2weeks, alltime)`
+- `date` - The date in `yyyy-mm-dd` format
 
 #### Common Types
 <details>

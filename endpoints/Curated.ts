@@ -1,17 +1,9 @@
 import api from "../api/api"
-import {DeviantArtCurated, DeviantArtCuratedTags} from "../types/index"
+import {DeviantArtCuratedTags} from "../types/index"
 
 export class Curated {
     private readonly api = new api(this.accessToken)
     constructor(private readonly accessToken: string) {}
-
-    /**
-     * Fetches featured content on DeviantArt.
-     */
-    public get = async (params?: {offset?: number}) => {
-        const result = await this.api.get(`api/v1/oauth2/curated`, {params})
-        return result as Promise<DeviantArtCurated>
-    }
 
     /**
      * Fetches featured tags.

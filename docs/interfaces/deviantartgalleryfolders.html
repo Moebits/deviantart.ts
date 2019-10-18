@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GalleryAll | deviantart.ts</title>
+	<title>DeviantArtGalleryFolders | deviantart.ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,400,400i,700" rel="stylesheet">
@@ -55,10 +55,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="galleryall.html">GalleryAll</a>
+					<a href="deviantartgalleryfolders.html">DeviantArtGalleryFolders</a>
 				</li>
 			</ul>
-			<h1>Interface GalleryAll</h1>
+			<h1>Interface DeviantArtGalleryFolders</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GalleryAll</span>
+						<span class="target">DeviantArtGalleryFolders</span>
 					</li>
 				</ul>
 			</section>
@@ -80,9 +80,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="galleryall.html#has_more" class="tsd-kind-icon">has_<wbr>more</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="galleryall.html#next_offset" class="tsd-kind-icon">next_<wbr>offset</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="galleryall.html#results" class="tsd-kind-icon">results</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="deviantartgalleryfolders.html#has_more" class="tsd-kind-icon">has_<wbr>more</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="deviantartgalleryfolders.html#next_offset" class="tsd-kind-icon">next_<wbr>offset</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="deviantartgalleryfolders.html#results" class="tsd-kind-icon">results</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,7 +96,7 @@
 					<div class="tsd-signature tsd-kind-icon">has_<wbr>more<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Tenpi/deviantart.ts/blob/539ceca/types/GalleryTypes.ts#L11">types/GalleryTypes.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/Tenpi/deviantart.ts/blob/2507ab4/types/GalleryTypes.ts#L24">types/GalleryTypes.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -106,19 +106,39 @@
 					<div class="tsd-signature tsd-kind-icon">next_<wbr>offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Tenpi/deviantart.ts/blob/539ceca/types/GalleryTypes.ts#L12">types/GalleryTypes.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/Tenpi/deviantart.ts/blob/2507ab4/types/GalleryTypes.ts#L25">types/GalleryTypes.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="results" class="tsd-anchor"></a>
 					<h3>results</h3>
-					<div class="tsd-signature tsd-kind-icon">results<span class="tsd-signature-symbol">:</span> <a href="deviantartdeviation.html" class="tsd-signature-type">DeviantArtDeviation</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">results<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Tenpi/deviantart.ts/blob/539ceca/types/GalleryTypes.ts#L13">types/GalleryTypes.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/Tenpi/deviantart.ts/blob/2507ab4/types/GalleryTypes.ts#L17">types/GalleryTypes.ts:17</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> deviations<span class="tsd-signature-symbol">?: </span><a href="deviantartdeviation.html" class="tsd-signature-type">DeviantArtDeviation</a><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>folderid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> size<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -135,16 +155,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="galleryall.html" class="tsd-kind-icon">Gallery<wbr>All</a>
+						<a href="deviantartgalleryfolders.html" class="tsd-kind-icon">Deviant<wbr>Art<wbr>Gallery<wbr>Folders</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="galleryall.html#has_more" class="tsd-kind-icon">has_<wbr>more</a>
+								<a href="deviantartgalleryfolders.html#has_more" class="tsd-kind-icon">has_<wbr>more</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="galleryall.html#next_offset" class="tsd-kind-icon">next_<wbr>offset</a>
+								<a href="deviantartgalleryfolders.html#next_offset" class="tsd-kind-icon">next_<wbr>offset</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="galleryall.html#results" class="tsd-kind-icon">results</a>
+								<a href="deviantartgalleryfolders.html#results" class="tsd-kind-icon">results</a>
 							</li>
 						</ul>
 					</li>

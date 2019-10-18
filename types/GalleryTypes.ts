@@ -1,19 +1,19 @@
 import {DeviantArtDeviation} from "../types"
 
-export interface GalleryResult {
+export interface DeviantArtGalleryResult {
     has_more: boolean
     next_offset: number | null
     name?: string
     results: DeviantArtDeviation[]
 }
 
-export interface GalleryAll {
+export interface DeviantArtGalleryAll {
     has_more: boolean
     next_offset: number | null
     results: DeviantArtDeviation[]
 }
 
-export interface GalleryFolders {
+export interface DeviantArtGalleryFolders {
     results: {
         folderid: string
         parent: string | null

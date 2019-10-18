@@ -17,7 +17,6 @@ export default class Api {
         params = params.params ? params.params : params
         params.access_token = this.accessToken
         const url = apiURL + endpoint
-        console.log(params)
         const result = await axios.get(url, {params} as AxiosRequestConfig).then((r) => r.data)
         return result
     }
