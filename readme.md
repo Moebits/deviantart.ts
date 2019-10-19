@@ -1,6 +1,11 @@
-![DeviantArt.ts](images/deviantart.tslogo.gif)
-
-[![NPM](https://nodei.co/npm/deviantart.ts.png)](https://nodei.co/npm/deviantart.ts/)
+<div align="left">
+  <p>
+    <a href="https://tenpi.github.io/deviantart.ts/"><img src="https://raw.githubusercontent.com/Tenpi/deviantart.ts/master/images/deviantart.tslogo.gif" width="500" /></a>
+  </p>
+  <p>
+    <a href="https://nodei.co/npm/deviantart.ts/"><img src="https://nodei.co/npm/deviantart.ts.png" /></a>
+  </p>
+</div>
 
 ### About
 This is a wrapper for the DeviantArt API that covers all of the public endpoints, includes typings, and various utility functions to make finding deviations easier. 
