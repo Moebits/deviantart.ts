@@ -1,4 +1,4 @@
-<div align="center">
+<div align="left">
   <p>
     <a href="https://tenpi.github.io/deviantart.ts/"><img src="https://raw.githubusercontent.com/Tenpi/deviantart.ts/master/images/deviantart.tslogo.gif" width="500" /></a>
   </p>
