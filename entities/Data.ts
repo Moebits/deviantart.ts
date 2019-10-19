@@ -1,5 +1,5 @@
 import api from "../api/api"
-import {DeviantArtData} from "./../types/ApiTypes"
+import {DeviantArtData} from "../types/ApiTypes"
 
 export class Data {
     private readonly api = new api(this.accessToken)
