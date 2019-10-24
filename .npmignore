@@ -2,3 +2,5 @@ dist/.env
 .env
 docs
 test
+.vscode
+images

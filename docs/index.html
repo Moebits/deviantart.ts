@@ -6,7 +6,6 @@
 	<title>deviantart.ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,400,400i,700" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
@@ -63,8 +62,14 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p><img src="https://raw.githubusercontent.com/Tenpi/deviantart.ts/master/images/deviantart.tslogo.gif" alt="DeviantArt.ts"></p>
-				<p><a href="https://nodei.co/npm/deviantart.ts/"><img src="https://nodei.co/npm/deviantart.ts.png" alt="NPM"></a></p>
+				<div align="left">
+					<p>
+						<a href="https://tenpi.github.io/deviantart.ts/"><img src="https://raw.githubusercontent.com/Tenpi/deviantart.ts/master/images/deviantart.tslogo.gif" width="500" /></a>
+					</p>
+					<p>
+						<a href="https://nodei.co/npm/deviantart.ts/"><img src="https://nodei.co/npm/deviantart.ts.png" /></a>
+					</p>
+				</div>
 				<a href="#about" id="about" style="color: inherit; text-decoration: none;">
 					<h3>About</h3>
 				</a>
@@ -166,7 +171,7 @@ useAPI()</code></pre>
 				</a>
 				<p>There are many more less commonly used endpoints such as <strong>Curated</strong>, <strong>Stash</strong>, and <strong>Data</strong>. For a more complete documentation please read the <a href="https://www.deviantart.com/developers/http/v1/20160316"><strong>api documentation</strong></a> on DeviantArt.</p>
 				<a href="#common-parameters" id="common-parameters" style="color: inherit; text-decoration: none;">
-					<h6>Common Parameters:</h6>
+					<h5>Common Parameters:</h5>
 				</a>
 				<ul>
 					<li><code>mature_content</code> - set to true to include mature results.</li>
@@ -302,6 +307,42 @@ useAPI()</code></pre>
 }</code></pre>
 				</details>
 				<details>
+					<summary>DeviantArtUserProfile</summary>
+					<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> DeviantArtUserProfile {
+    user: DeviantArtUser
+    is_watching: <span class="hljs-built_in">boolean</span>
+    profile_url: <span class="hljs-built_in">string</span>
+    user_is_artist: <span class="hljs-built_in">boolean</span>
+    artist_level: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+    artist_specialty: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+    real_name: <span class="hljs-built_in">string</span>
+    tagline: <span class="hljs-built_in">string</span>
+    countryid: <span class="hljs-built_in">number</span>
+    country: <span class="hljs-built_in">string</span>
+    website: <span class="hljs-built_in">string</span>
+    bio: <span class="hljs-built_in">string</span>
+    cover_photo: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+    profile_pic: DeviantArtDeviation | <span class="hljs-literal">null</span>
+    last_status: DeviantArtStatus | <span class="hljs-literal">null</span>
+    stats: {
+        user_deviations: <span class="hljs-built_in">number</span>
+        user_favourites: <span class="hljs-built_in">number</span>
+        user_comments: <span class="hljs-built_in">number</span>
+        profile_pageviews: <span class="hljs-built_in">number</span>
+        profile_comments: <span class="hljs-built_in">number</span>
+    }
+    collections?: <span class="hljs-built_in">Array</span>&lt;{
+        folderid: <span class="hljs-built_in">string</span>
+        name: <span class="hljs-built_in">string</span>
+    }&gt;
+    galleries?: <span class="hljs-built_in">Array</span>&lt;{
+        folderid: <span class="hljs-built_in">string</span>
+        parent: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>
+        name: <span class="hljs-built_in">string</span>
+    }&gt;
+}</code></pre>
+				</details>
+				<details>
 					<summary>DeviantArtComment</summary>
 					<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> DeviantArtComment {
     commentid: <span class="hljs-built_in">string</span>
@@ -313,6 +354,24 @@ useAPI()</code></pre>
     user: DeviantArtUser
 }</code></pre>
 				</details>
+				<a href="#extending-deviations" id="extending-deviations" style="color: inherit; text-decoration: none;">
+					<h4>Extending Deviations</h4>
+				</a>
+				<p>The API Deviation object and the RSS Deviation object are missing a couple properties from each other,
+					most notably the deviation description and the author&#39;s profile info respectively. There are some extending
+				functions that will extend the objects to add these missing properties.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useAPI</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> deviation = <span class="hljs-keyword">await</span> deviantArt.deviation.get({deviationid: <span class="hljs-string">"1FA35A6D-E2CD-3CDF-1A65-410AB577BF10"</span>})
+    <span class="hljs-comment">/*Takes an array of DeviantArtDeviation objects*/</span>
+    <span class="hljs-keyword">const</span> extendedAPIDeviations = <span class="hljs-keyword">await</span> deviantArt.extendDeviations([deviation])
+    <span class="hljs-comment">//It now has a description!</span>
+    extendedAPIDeviations[<span class="hljs-number">0</span>].description
+
+    <span class="hljs-keyword">const</span> deviationsRSS = <span class="hljs-keyword">await</span> deviantArt.rss.search(<span class="hljs-string">"anime"</span>, <span class="hljs-number">10</span>, <span class="hljs-string">"popular"</span>)
+    <span class="hljs-keyword">const</span> extendedRSSDeviations = <span class="hljs-keyword">await</span> deviantArt.extendRSSDeviations(deviationsRSS)
+    <span class="hljs-comment">//It now has the author's profile info, such as profile picture and cover photo!</span>
+    extendedRSSDeviations[<span class="hljs-number">0</span>].author.profile_pic
+}</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -556,7 +615,7 @@ useAPI()</code></pre>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Made by <a href="https://github.com/Horyus" target="_blank">Horyus</a>. Documentation generated by <a href="http://typedoc.org/" target="_blank">TypeDoc.</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
