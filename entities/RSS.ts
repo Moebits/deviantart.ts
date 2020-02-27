@@ -8,7 +8,7 @@ export class RSS {
      * Gets a deviation by searching the RSS Feed. You can provide a URL or a search query.
      */
     public get = async (deviationURL: string): Promise<DeviationRSS> => {
-        const deviantInfo = await api.parseUrl(deviationURL)
+        const deviantInfo = api.parseUrl(deviationURL)
         if (!deviantInfo.title) {
             const query = `${deviationURL.trim().replace(/ +/g, "-")}`
             const jsonQuery = await api.getRSS({q: query, type: "deviation", access_token: this.accessToken}, 1)

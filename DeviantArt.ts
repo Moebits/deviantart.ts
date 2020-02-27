@@ -76,7 +76,12 @@ export default class DeviantArt {
     public extendDeviations = async (deviations: DeviantArtDeviation[]) => {
         const deviationArray: DeviantArtDeviationExtended[] = []
         for (let i = 0; i < deviations.length; i++) {
-            const rssDeviation = await this.rss.get(deviations[i].url)
+            let rssDeviation: DeviationRSS
+            try {
+            rssDeviation = await this.rss.get(deviations[i].url)
+            } catch {
+                continue
+            }
             const extendedDeviation  = deviations[i] as DeviantArtDeviationExtended
             extendedDeviation.description = rssDeviation.description
             extendedDeviation.keywords = rssDeviation.keywords

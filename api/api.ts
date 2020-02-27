@@ -38,8 +38,7 @@ export default class Api {
         const user = url.match(/(?<=com\/)(.*?)(?=\/art)/g) ? url.match(/(?<=com\/)(.*?)(?=\/art)/)[0] : null
         const id = url.match(/\d{5,}/) ? url.match(/\d{5,}/)[0] : null
         if (title) {
-            const index = title.search(/\d/)
-            title = title.slice(0, index)
+            title = title.replace(/\d+/, "").trim()
         }
         return {title, user, id}
     }
