@@ -1,6 +1,5 @@
 import api from "./api/api"
 import {Browse, Collections, Comments, Curated, Data, Deviation, Gallery, RSS, Stash, User, Util} from "./entities/index"
-import {deviantArt} from "./test/login"
 import {DeviantArtAuth, DeviantArtDeviation, DeviantArtDeviationExtended, DeviationRSS, DeviationRSSExtended} from "./types/index"
 
 /**
@@ -99,7 +98,7 @@ export default class DeviantArt {
         const deviationArray: DeviationRSSExtended[] = []
         for (let i = 0; i < deviationsRSS.length; i++) {
             const {user} = api.parseUrl(deviationsRSS[i].url)
-            const deviantUser = await deviantArt.user.profile({username: user})
+            const deviantUser = await this.user.profile({username: user})
             const extendedDeviation = deviationsRSS[i] as unknown as DeviationRSSExtended
             extendedDeviation.author = deviantUser
             deviationArray.push(extendedDeviation)
