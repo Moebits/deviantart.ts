@@ -1,4 +1,4 @@
-import DeviantArt from "./DeviantArt"
+import DeviantArt from "./deviantart"
 
 require("dotenv").config();
 
