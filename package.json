@@ -34,7 +34,7 @@
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "gulp": "^4.0.2",
-    "mocha": "^6.2.1",
+    "mocha": "^10.2.0",
     "ts-mocha": "^6.0.0",
     "typedoc": "^0.15.0",
     "typedoc-dark-theme": "0.0.11",
