@@ -1,6 +1,6 @@
 <div align="left">
   <p>
-    <a href="https://tenpi.github.io/deviantart.ts/"><img src="https://raw.githubusercontent.com/Tenpi/deviantart.ts/master/images/deviantart.tslogo.gif" width="500" /></a>
+    <a href="https://moebits.github.io/deviantart.ts/"><img src="https://raw.githubusercontent.com/Moebits/deviantart.ts/master/images/deviantart.tslogo.gif" width="500" /></a>
   </p>
   <p>
     <a href="https://nodei.co/npm/deviantart.ts/"><img src="https://nodei.co/npm/deviantart.ts.png" /></a>
@@ -21,7 +21,7 @@ Register an app at [**DeviantArt Developers**](https://www.deviantart.com/develo
 ### Useful Links
 
 - [**Official DeviantArt Documentation**](https://www.deviantart.com/developers/http/v1/20160316)
-- [**DeviantArt.ts Documentation**](https://tenpi.github.io/deviantart.ts/)
+- [**DeviantArt.ts Documentation**](https://moebits.github.io/deviantart.ts/)
 
 #### Searching for Deviations
 ```ts
@@ -68,16 +68,16 @@ useAPI()
 ```ts
 async function useAPI() {
     /*Search for a user's profile*/
-    const user = await deviantArt.user.get({username: "tenpii"})
+    const user = await deviantArt.user.get({username: "myname"})
 
     /*Get all of a user's deviations.*/
-    const userDeviations = await deviantArt.gallery.all({username: "tenpii"})
+    const userDeviations = await deviantArt.gallery.all({username: "myname"})
 
     /*Get all of their statuses*/
-    const statuses = await deviantArt.user.statuses({username: "tenpii"})
+    const statuses = await deviantArt.user.statuses({username: "myname"})
 
     /*Get all of their profile comments*/
-    const profileComments = await deviantArt.comments.profile({username: "tenpii"})
+    const profileComments = await deviantArt.comments.profile({username: "myname"})
 
     /*Get all of a user's folders*/
     const folders = await deviantArt.collections.folders({username: "fhilippe124"})
